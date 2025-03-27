@@ -6,7 +6,7 @@ import "../Header/Header.css"
     return (
         <div className="Header">
             <div className="image">
-            <img src="https://ichef.bbci.co.uk/images/ic/512xn/p09j7x4c.jpg.webp" alt="teste" className="murilo"/>
+            <img src="https://ichef.bbci.co.uk/images/ic/512xn/p09j7x4c.jpg.webp" alt="teste" className="logo"/>
             </div>
             <nav>
                 <ul>

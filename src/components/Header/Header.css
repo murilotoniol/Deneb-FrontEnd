@@ -18,33 +18,46 @@ nav ul li a {
     color: #333;
 }
 
-.Header{
-    background-color: rgba(255, 255, 255, 0.75);
+.Header {
+    background-color: rgba(235, 226, 226, 0.75);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 4rem;
+    height: 7%;
     position: fixed;
     top: 0;
     width: 100%;
     z-index: 10;
-    background-color: lightgray;
+    font-size: 14px;
 }
 
-.Header > nav {
+.Header>nav {
     display: flex;
     gap: 2rem;
 }
 
+.botao{
+    width: 5%;
+    padding: 8px;
+    margin: 3px 0;
+    background: #6a38f3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
+button:hover {
+    background: #4412ce;
+}
 
-.image{
+.image {
     width: 5rem;
     height: 2rem;
 }
 
-.murilo{
+.logo {
     width: 100%;
-  height: 100%;
-  object-fit: contain;
+    height: 100%;
+    object-fit: contain;
 }
