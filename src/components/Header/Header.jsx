@@ -7,7 +7,11 @@ export default function Header() {
 
         <header className="Header">
             <div className="image">
+<<<<<<< HEAD
                 <img src="https://ichef.bbci.co.uk/images/ic/512xn/p09j7x4c.jpg.webp" alt="teste" className="murilo" />
+=======
+            <img src="https://ichef.bbci.co.uk/images/ic/512xn/p09j7x4c.jpg.webp" alt="teste" className="logo"/>
+>>>>>>> refs/remotes/origin/develop
             </div>
             <nav>
                 <ul>
