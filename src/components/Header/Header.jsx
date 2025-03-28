@@ -2,11 +2,12 @@ import React from "react";
 import "../Header/Header.css"
 
 
- export default function Header() {
+export default function Header() {
     return (
-        <div className="Header">
+
+        <header className="Header">
             <div className="image">
-            <img src="https://ichef.bbci.co.uk/images/ic/512xn/p09j7x4c.jpg.webp" alt="teste" className="murilo"/>
+                <img src="https://ichef.bbci.co.uk/images/ic/512xn/p09j7x4c.jpg.webp" alt="teste" className="murilo" />
             </div>
             <nav>
                 <ul>
@@ -17,7 +18,7 @@ import "../Header/Header.css"
                 </ul>
             </nav>
             <button className="botao">Login</button>
-        </div>
+        </header>
 
     );
 
