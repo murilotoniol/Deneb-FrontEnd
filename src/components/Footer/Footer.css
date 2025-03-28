@@ -10,6 +10,7 @@ footer {
     flex-direction: column-reverse;
     position: fixed;
     align-items: center;
+    font-size: 14px;
 }
 
 .footer-content{

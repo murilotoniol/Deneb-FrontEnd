@@ -1,17 +1,13 @@
 import React from "react";
 import "../Header/Header.css"
-
+import logo from "../../assets/teste.png"
 
 export default function Header() {
     return (
 
         <header className="Header">
             <div className="image">
-<<<<<<< HEAD
-                <img src="https://ichef.bbci.co.uk/images/ic/512xn/p09j7x4c.jpg.webp" alt="teste" className="murilo" />
-=======
-            <img src="https://ichef.bbci.co.uk/images/ic/512xn/p09j7x4c.jpg.webp" alt="teste" className="logo"/>
->>>>>>> refs/remotes/origin/develop
+            <img src={logo} alt="teste" className="logo" />
             </div>
             <nav>
                 <ul>
@@ -23,7 +19,6 @@ export default function Header() {
             </nav>
             <button className="botao">Login</button>
         </header>
-
     );
 
 }
