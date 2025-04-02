@@ -11,8 +11,8 @@ export default function Cadastro() {
                 <input type="email" placeholder="Digite seu email" />
                 <input type="text" placeholder="Digite sue telefone" />
                 <input type="password" placeholder="Digite sua senha" />
-                <label >Insira sua data de nascimento</label>
-                <input type="date" placeholder="Digite sua Data de Nascimento" />
+                <input type="text" placeholder="Digite sua Data de Nascimento" />
+                <button type="button">Registrar</button>
             </form>
         </div>
     )
