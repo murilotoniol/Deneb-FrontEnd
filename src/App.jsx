@@ -7,6 +7,7 @@ import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Cadastro from './pages/cadastro/Cadastro';
 import Home from './pages/Home/Home';
+import OfertaServiço from './pages/OfertaServiço/OfertaServiço'
 
 function App() {
   return(
@@ -15,8 +16,9 @@ function App() {
         <Login/>
         <Footer />
         <Cadastro/>
-        */}
         <Home/> 
+        */} 
+        <OfertaServiço/>
         
     </div>
   )
