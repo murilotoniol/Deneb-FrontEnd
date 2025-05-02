@@ -1,15 +1,9 @@
 import React from "react"
-import Header from "../../components/Header/Header"
-import Footer from "../../components/Footer/Footer"
 import '../login/styles.css'
-import Imagem from "../../assets/Teste1.jpg"
 
 export default function Login() {
     return (
-            <div className="container">
-                <div className="image-side">
-                    <img src={Imagem} alt="Pessoa cuidando do seu animal" />
-                </div>
+            <main>
                 <div className="formulario">
                     <form className="forms">
                         <h1>Entrar</h1>
@@ -39,6 +33,6 @@ export default function Login() {
                         </div>
                     </form>
                 </div>
-           </div>
+           </main>
     )
 }
