@@ -5,13 +5,15 @@ import Login from './pages/login/Login'
 import ReactDOM from "react-dom";
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import Cadastro from './pages/cadastro/Cadastro';
 
 function App() {
   return(
     <div>
-        <Header/>
+        {/* <Header/>
         <Login/>
-        <Footer />
+        <Footer /> */}
+        <Cadastro/>
     </div>
   )
   

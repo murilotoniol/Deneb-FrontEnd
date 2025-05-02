@@ -1,0 +1,24 @@
+.cadastro{
+    display: flex;
+    width: 100%;
+    min-height: 83vh;
+    background-color: lightgray;
+    justify-content: center;
+    align-items: center;
+}
+
+.formularioCadastor{
+    display: grid;
+    background-color: #fff;
+    width: 720px;
+    height: 450px;
+    justify-content: start;
+    align-content: center;
+    padding-left: 50px;
+}
+
+.formularioCadastor input{
+    padding-left: 10px;
+    padding: 3px;
+    margin: 5px;
+}
