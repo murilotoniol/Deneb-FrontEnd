@@ -15,9 +15,11 @@ function App() {
         <Login/>
         <Footer />
         <Cadastro/>
-        */}
         <Home/> 
-        
+        */}
+        <Header/>
+        <Cadastro/>
+        <Footer />
     </div>
   )
   
