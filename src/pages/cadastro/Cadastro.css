@@ -1,24 +1,64 @@
-.cadastro{
+.cadastro {
     display: flex;
-    width: 100%;
-    min-height: 83vh;
-    background-color: lightgray;
     justify-content: center;
     align-items: center;
-}
-
-.formularioCadastor{
-    display: grid;
-    background-color: #fff;
-    width: 720px;
-    height: 450px;
-    justify-content: start;
-    align-content: center;
-    padding-left: 50px;
-}
-
-.formularioCadastor input{
-    padding-left: 10px;
-    padding: 3px;
-    margin: 5px;
-}
+    min-height: 100vh;
+    background-image: url("https://wallpapers.com/images/featured-full/imagem-de-fundo-yeaxrij2aepc1xio.jpg");
+    background-size: cover;
+    background-position: center;
+    padding: 2rem;
+  }
+  
+  .formularioCadastro {
+    background-color: rgba(255, 255, 255, 0.95); /* Transparência para ver o fundo */
+    padding: 2rem 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 400px;
+    gap: 1rem;
+  }
+  
+  .formularioCadastro input {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    transition: border-color 0.2s ease;
+  }
+  
+  .formularioCadastro input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+  }
+  
+  button {
+    padding: 0.75rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  button:disabled {
+    background-color: #6c757d;
+    cursor: not-allowed;
+  }
+  
+  .error-message {
+    color: #dc3545;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: -0.5rem;
+  }
+  
