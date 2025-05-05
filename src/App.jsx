@@ -21,7 +21,6 @@ function App() {
         <OfertaServiço/> 
         */} 
         <ProcurarServiços/>
-        
     </div>
   )
   
