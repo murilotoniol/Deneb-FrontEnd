@@ -1,0 +1,87 @@
+.find-main {
+    background: linear-gradient(to bottom, #e6f4ea, #ffffff);
+    min-height: 100vh;
+    padding: 1.5rem;
+  }
+  
+  .find-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  
+  .find-title {
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: bold;
+    color: #22543d;
+    margin-bottom: 2.5rem;
+  }
+  
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .service-card {
+    background-color: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .service-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #2f855a;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  
+  .service-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+  
+  .service-description {
+    color: #555;
+    margin-bottom: 1rem;
+  }
+  
+  .service-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: #444;
+    margin-bottom: 1rem;
+  }
+  
+  .detail-icon {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.25rem;
+    vertical-align: middle;
+  }
+  
+  .btn-outline {
+    border: 2px solid #2f855a;
+    background-color: transparent;
+    color: #2f855a;
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .btn-outline:hover {
+    background-color: #e6f4ea;
+  }
+  
