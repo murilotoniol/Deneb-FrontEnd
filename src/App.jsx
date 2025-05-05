@@ -6,14 +6,18 @@ import ReactDOM from "react-dom";
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Cadastro from './pages/cadastro/Cadastro';
+import Home from './pages/Home/Home';
 
 function App() {
   return(
     <div>
         {/* <Header/>
         <Login/>
-        <Footer /> */}
+        <Footer />
         <Cadastro/>
+        */}
+        <Home/> 
+        
     </div>
   )
   
