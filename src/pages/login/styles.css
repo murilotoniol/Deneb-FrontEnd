@@ -17,7 +17,7 @@ main {
 
 .formulario {
   width: 25%;
-  background: #ffffffeb;
+  background: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,7 +30,7 @@ main {
 .forms h1 {
   text-align: center;
   font-size: 30px;
-  color: #333;
+  color: #42A5F6;
 }
 
 .forms .input-field {
@@ -42,7 +42,7 @@ main {
 
 .forms .input-field label {
   font-size: 20px;
-  color: black;
+  color: #42A5F6;
 }
 
 .forms .input-field input {
@@ -73,13 +73,13 @@ main {
 }
 
 .forms .recall-forget a {
-  color: blue;
+  color: #5591A9;
 }
 
 .forms button {
   width: 100%;
   height: 45px;
-  background: #333;
+  background: #42A5F6;
   border: none;
   outline: none;
   border-radius: 40px;
@@ -91,7 +91,7 @@ main {
 }
 
 .recall-forget label input {
-  accent-color: #333;
+  accent-color: #5591A9;
   margin-right: 4px;
 }
 
@@ -108,7 +108,7 @@ main {
 }
 
 .signup-link p a {
-  color: blue;
+  color: #5591A9;
   text-decoration: none;
   font-weight: 600;
 }

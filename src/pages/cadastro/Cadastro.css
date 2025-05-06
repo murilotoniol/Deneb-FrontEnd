@@ -1,64 +1,69 @@
 .cadastro {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-image: url("https://wallpapers.com/images/featured-full/imagem-de-fundo-yeaxrij2aepc1xio.jpg");
-    background-size: cover;
-    background-position: center;
-    padding: 2rem;
-  }
-  
-  .formularioCadastro {
-    background-color: rgba(255, 255, 255, 0.95); /* Transparência para ver o fundo */
-    padding: 2rem 3rem;
-    border-radius: 1rem;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 400px;
-    gap: 1rem;
-  }
-  
-  .formularioCadastro input {
-    padding: 0.75rem 1rem;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 0.5rem;
-    transition: border-color 0.2s ease;
-  }
-  
-  .formularioCadastro input:focus {
-    outline: none;
-    border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
-  }
-  
-  button {
-    padding: 0.75rem;
-    font-size: 1rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  button:disabled {
-    background-color: #6c757d;
-    cursor: not-allowed;
-  }
-  
-  .error-message {
-    color: #dc3545;
-    font-size: 0.9rem;
-    text-align: center;
-    margin-top: -0.5rem;
-  }
-  
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   min-height: 100vh;
+   background: linear-gradient(to bottom, #6AB7D5, #ffffff);
+   padding: 2rem;
+ }
+ 
+ .formularioCadastro {
+   background-color: rgba(10, 42, 55, 0.658);
+   padding: 2rem 3rem;
+   border-radius: 1rem;
+   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+   display: flex;
+   flex-direction: column;
+   width: 100%;
+   max-width: 400px;
+   gap: 1rem;
+   color: white;
+ }
+ 
+ .formularioCadastro input {
+   padding: 0.75rem 1rem;
+   font-size: 1rem;
+   border: 2px solid #6AB7D5; /* Borda azul clara */
+   border-radius: 0.5rem;
+   background-color: #0A2A37; /* Fundo escuro do input */
+   color: white;
+   transition: border-color 0.2s ease;
+ }
+ 
+ .formularioCadastro input::placeholder {
+   color: #aaa;
+ }
+ 
+ .formularioCadastro input:focus {
+   outline: none;
+   border-color: #42A5F6; /* Azul ao focar */
+   box-shadow: 0 0 0 2px rgba(66, 165, 246, 0.3);
+ }
+ 
+ button {
+   padding: 0.75rem;
+   font-size: 1rem;
+   background-color: #42A5F6; /* Azul do botão */
+   color: white;
+   border: none;
+   border-radius: 0.5rem;
+   cursor: pointer;
+   transition: background-color 0.2s ease;
+ }
+ 
+ button:hover {
+   background-color: #5591A9; /* Azul mais escuro ao passar o mouse */
+ }
+ 
+ button:disabled {
+   background-color: #6AB7D5; /* Azul claro para quando desabilitado */
+   cursor: not-allowed;
+ }
+ 
+ .error-message {
+   color: #FF6B6B; /* Cor de erro em vermelho */
+   font-size: 0.9rem;
+   text-align: center;
+   margin-top: -0.5rem;
+ }
+ 

@@ -1,4 +1,3 @@
-
 import React from 'react'
 import './App.css'
 import Login from './pages/login/Login'
@@ -13,17 +12,19 @@ import ProcurarServiços from './pages/ProcurarServiços/ProcurarServiços'
 function App() {
   return(
     <div>
-        {/* <Header/>
-        <Login/>
-        <Footer />
-        <Cadastro/>
-        <Home/>
-        <OfertaServiço/> 
+        {/* <Header/> ok
+        <Login/> ok
+        <Footer /> ok
+        <Cadastro/> estilizar ainda
+        <Home/> ok
+        <OfertaServiço/> ok
+        <ProcurarServiços/> ok
         */} 
-        <ProcurarServiços/>
+        <Header/>
+        <Cadastro/>
+        <Footer />
     </div>
   )
-  
 }
 
 export default App
