@@ -1,38 +1,32 @@
 import React, { useState } from "react";
 import "../cadastro/Cadastro.css";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth, googleProvider } from '../../services/firebase';
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 export default function Cadastro() {
-    const [formData, setFormData] = useState({
-        first_name: "",
-        last_name: "",
-        email: "",
-        phone_number: "",
-        birth_date: "",
-    });
-
-    const [users, setUsers] = useState([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
-
-    function handleChange(event) {
-        setFormData({ ...formData, [event.target.name]: event.target.value });
-    }
-
-    async function createUsers() {
-        setLoading(true);
-        setError(null);
-
+    
+    const provider = new GoogleAuthProvider();
+    const signInWithGoogle = async () => {
         try {
-            const response = await api.post('/users', formData);
-            setUsers(response.data);
-            setFormData({ first_name: "", last_name: "", email: "", phone_number: "", birth_date: "" }); // Reset form
-        } catch (err) {
-            setError("Erro ao registrar usuário. Tente novamente.");
-            console.error("Error creating user:", err);
-        } finally {
-            setLoading(false);
+            await signInWithPopup(auth, provider);
+            alert('Signed in successfully with Google');
+        } catch (error) {
+            console.log(error, auth, googleProvider);
         }
-    }
+    };
+
+    console.log(auth);
+    createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => { 
+            const user = userCredential.user;
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+        });
+
+    const botao = document.getElementById("buttonCadastro");
 
     return (
         <div className="cadastro">
@@ -42,12 +36,14 @@ export default function Cadastro() {
                 <input type="email" name="email" placeholder="Digite seu email" value={formData.email} onChange={handleChange} />
                 <input type="text" name="phone_number" placeholder="Digite seu telefone" value={formData.phone_number} onChange={handleChange} />
                 <input type="text" name="birth_date" placeholder="Digite sua Data de Nascimento" value={formData.birth_date} onChange={handleChange} />
-                
+                <input type="text" name="password" placeholder="Digite sua Senha" value={formData.password} onChange={handleChange} />
+
                 {error && <p className="error-message">{error}</p>}
-                <button type="button" onClick={createUsers} disabled={loading}>
+                <button id="buttonCadastro" type="button" onClick={createUserWithEmailAndPassword} disabled={loading}>
                     {loading ? "Registrando..." : "Registrar"}
                 </button>
             </form>
         </div>
+
     );
 }

@@ -1,11 +1,23 @@
 import React from "react";
 import { PawPrint, Search, Heart } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
 import { motion } from "framer-motion";
 import "./Home.css";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 
 export default function Home() {
+
+  const navigate = useNavigate();
+
+  const goToOfertarServico = () =>{
+      navigate('/ofertaservico')
+  }
+
+  const goToProcurarServico = () =>{
+      navigate('/procurarservicos')
+  }
+
   return (
     <main className="home-main">
       <Header />
@@ -24,10 +36,10 @@ export default function Home() {
             Conectando cuidadores e donos de animais com facilidade e carinho.
           </p>
           <div className="home-buttons">
-            <button className="btn-primary">
+            <button className="btn-primary" type="button" onClick={goToProcurarServico}>
               <Search className="icon" /> Buscar Serviços
             </button>
-            <button className="btn-outline">
+            <button className="btn-outline" type="button" onClick={goToOfertarServico}>
               <PawPrint className="icon" /> Oferecer Serviço
             </button>
           </div>

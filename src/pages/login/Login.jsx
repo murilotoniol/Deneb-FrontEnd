@@ -1,7 +1,15 @@
 import React from "react"
+import { Link, useNavigate } from 'react-router-dom';
 import '../login/styles.css'
 
 export default function Login() {
+    
+    const navigate = useNavigate();
+
+    const goToHome = () => {
+        navigate('/');
+    };
+
     return (
             <main>
                 <div className="formulario">
@@ -24,11 +32,11 @@ export default function Login() {
                             <a href="#">Esqueceu a senha?</a>
                         </div>
 
-                        <button type="button">Entrar</button>
+                        <button type="button" onClick={goToHome}>Entrar</button>
 
                         <div className="signup-link">
                             <p>
-                                Não tem uma conta? <a href="#">Registar</a>
+                                Não tem uma conta? <Link to='/registrar'>Registrar</Link>
                             </p>
                         </div>
                     </form>
