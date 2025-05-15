@@ -1,46 +1,58 @@
-import React from "react"
+import React,{useState} from "react"
 import { Link, useNavigate } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import '../login/styles.css'
 
 export default function Login() {
-    
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const auth = getAuth();
 
-    const goToHome = () => {
-        navigate('/');
+    const handleLogin = async () => {
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            console.log("Usuário logado:", userCredential.user);
+            navigate("/");
+        } catch (error) {
+            alert("Erro ao logar: " + error.message);
+        }
     };
 
+
+
+
     return (
-            <main>
-                <div className="formulario">
-                    <form className="forms">
-                        <h1>Entrar</h1>
-                        <div className="input-field">
-                            <label for="email">Email:</label>
-                            <input id="email" placeholder="Digite seu email" type="email" />
-                        </div>
-                        <div className="input-field">
-                            <label for="password">Senha:</label>
-                            <input id="password" placeholder="Digite sua senha" type="password" />
-                        </div>
+        <main>
+            <div className="formulario">
+                <form className="forms">
+                    <h1>Entrar</h1>
+                    <div className="input-field">
+                        <label htmlFor="email">Email:</label>
+                        <input id="email" placeholder="Digite seu email" type="email" value={email} onChange={e => setEmail(e.target.value)} />
+                    </div>
+                    <div className="input-field">
+                        <label htmlFor="password">Senha:</label>
+                        <input id="password" placeholder="Digite sua senha" type="password" value={password} onChange={e => setPassword(e.target.value)} />
+                    </div>
 
-                        <div className="recall-forget">
-                            <label>
-                                <input type="checkbox" />
-                                Lembrar de mim
-                            </label>
-                            <a href="#">Esqueceu a senha?</a>
-                        </div>
+                    <div className="recall-forget">
+                        <label>
+                            <input type="checkbox" />
+                            Lembrar de mim
+                        </label>
+                        <a href="#">Esqueceu a senha?</a>
+                    </div>
 
-                        <button type="button" onClick={goToHome}>Entrar</button>
+                    <button type="button" onClick={handleLogin}>Entrar</button>
 
-                        <div className="signup-link">
-                            <p>
-                                Não tem uma conta? <Link to='/registrar'>Registrar</Link>
-                            </p>
-                        </div>
-                    </form>
-                </div>
-           </main>
+                    <div className="signup-link">
+                        <p>
+                            Não tem uma conta? <Link to='/registrar'>Registrar</Link>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </main>
     )
 }
