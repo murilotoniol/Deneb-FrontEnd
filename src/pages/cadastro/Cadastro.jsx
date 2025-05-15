@@ -31,6 +31,8 @@ export default function Cadastro() {
     return (
         <div className="cadastro">
             <form className="formularioCadastro">
+                <h1>Cadastro</h1>
+                <h2>Preencha os dados abaixo:</h2>
                 <input type="text" name="first_name" placeholder="Digite seu nome" value={formData.first_name} onChange={handleChange} />
                 <input type="text" name="last_name" placeholder="Digite seu sobrenome" value={formData.last_name} onChange={handleChange} />
                 <input type="email" name="email" placeholder="Digite seu email" value={formData.email} onChange={handleChange} />
