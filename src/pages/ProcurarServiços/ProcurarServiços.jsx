@@ -34,9 +34,9 @@ export default function FindService() {
   ];
 
   return (
-    <main className="find-main">
+    <div className="find-container">
       <Header />
-      <section className="find-container">
+      <div className="find-content">
         <motion.h1
           className="find-title"
           initial={{ opacity: 0, y: -20 }}
@@ -68,8 +68,8 @@ export default function FindService() {
             </div>
           ))}
         </div>
-      </section>
+      </div>
       <Footer />
-    </main>
+    </div>
   );
 }

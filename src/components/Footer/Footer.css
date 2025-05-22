@@ -3,14 +3,13 @@ footer {
     color: #E3F2FD;
     text-align: center;
     padding: 20px;
-    position: fixed;
-    bottom: 0;
     width: 100%;
     display: flex;
     flex-direction: column-reverse;
     align-items: center;
     font-size: 14px;
     border-top: 2px solid #42A5F6;
+    margin-top: auto;
   }
   
   .footer-content {

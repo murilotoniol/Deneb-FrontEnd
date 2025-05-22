@@ -1,13 +1,16 @@
-.find-main {
-  background: linear-gradient(to bottom, #6AB7D5, #ffffff);
+.find-container {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  padding: 1.5rem;
+  background: linear-gradient(to bottom, #6AB7D5, #ffffff);
 }
 
-.find-container {
+.find-content {
+  flex: 1;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 7rem 1.5rem 2rem;
+  width: 100%;
 }
 
 .find-title {
@@ -22,6 +25,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .service-card {

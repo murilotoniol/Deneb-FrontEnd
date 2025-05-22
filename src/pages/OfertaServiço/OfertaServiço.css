@@ -1,17 +1,25 @@
-.register-main {
-  background: linear-gradient(to bottom, #6AB7D5, #ffffff);
+.register-container {
+  display: flex;
+  flex-direction: column;
   min-height: 100vh;
-  padding: 1.5rem;
+  background: linear-gradient(to bottom, #6AB7D5, #ffffff);
 }
 
-.register-container {
+.register-content {
+  flex: 1;
   max-width: 600px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: 7rem 1.5rem 2rem;
+  width: 100%;
+}
+
+.register-form-container {
   background-color: #ffffff;
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border: 1px solid #6AB7D5;
+  padding: 2rem;
+  margin-bottom: 2rem;
 }
 
 .register-title {

@@ -7,6 +7,8 @@ import Cadastro from './pages/cadastro/Cadastro';
 import Home from './pages/Home/Home';
 import OfertaServiço from './pages/OfertaServiço/OfertaServiço'
 import ProcurarServiços from './pages/ProcurarServiços/ProcurarServiços'
+import Avaliacoes from './pages/avaliacoes/Avaliacoes';
+import Mensagens from './pages/mensagens/Mensagens';
 
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
             <Route path='/registrar' element={<Cadastro/>} />
             <Route path="/ofertaservico" element={<OfertaServiço />} />
             <Route path="/procurarservicos" element={<ProcurarServiços />} />
+            <Route path="/avaliacoes" element={<Avaliacoes />} />
+            <Route path="/mensagens" element={<Mensagens />} />
           </Routes>
 
     </div>
