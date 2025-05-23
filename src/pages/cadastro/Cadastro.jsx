@@ -13,6 +13,7 @@ export default function Cadastro() {
     first_name: "",
     last_name: "",
     email: "",
+    cpf: "",
     phone_number: "",
     birth_date: "",
     password: "",
@@ -34,11 +35,18 @@ export default function Cadastro() {
       email,
       password,
       confirmPassword,
+      cpf,
       first_name,
       last_name,
       phone_number,
       birth_date,
     } = formData;
+
+    if (password !== confirmPassword) {
+      setError("As senhas não coincidem.");
+      setLoading(false);
+      return;
+    }
 
     try {
       const userCredential = await createUserWithEmailAndPassword(
@@ -52,6 +60,7 @@ export default function Cadastro() {
       await setDoc(doc(db, "users", user.uid), {
         first_name,
         last_name,
+        cpf,
         phone_number,
         birth_date,
         email: user.email,
@@ -105,6 +114,13 @@ export default function Cadastro() {
         />
         <input
           type="text"
+          name="cpf"
+          placeholder="CPF"
+          value={formData.cpf}
+          onChange={handleChange}
+        />
+        <input
+          type="text"
           name="phone_number"
           placeholder="Telefone"
           value={formData.phone_number}
@@ -126,9 +142,9 @@ export default function Cadastro() {
         />
         <input
           type="password"
-          name="confirm_password"
+          name="confirmPassword"
           placeholder="Confirme Senha"
-          value={formData.password}
+          value={formData.confirmPassword}
           onChange={handleChange}
         />
 
