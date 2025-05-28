@@ -1,69 +1,156 @@
 .cadastro {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   min-height: 100vh;
-   background: linear-gradient(to bottom, #6AB7D5, #ffffff);
-   padding: 2rem;
- }
- 
- .formularioCadastro {
-   background-color: rgba(10, 42, 55, 0.658);
-   padding: 2rem 3rem;
-   border-radius: 1rem;
-   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-   display: flex;
-   flex-direction: column;
-   width: 100%;
-   max-width: 400px;
-   gap: 1rem;
-   color: white;
- }
- 
- .formularioCadastro input {
-   padding: 0.75rem 1rem;
-   font-size: 1rem;
-   border: 2px solid #6AB7D5;
-   border-radius: 0.5rem;
-   background-color: #0A2A37; 
-   color: white;
-   transition: border-color 0.2s ease;
- }
- 
- .formularioCadastro input::placeholder {
-   color: #aaa;
- }
- 
- .formularioCadastro input:focus {
-   outline: none;
-   border-color: #42A5F6; 
-   box-shadow: 0 0 0 2px rgba(66, 165, 246, 0.3);
- }
- 
- button {
-   padding: 0.75rem;
-   font-size: 1rem;
-   background-color: #42A5F6; 
-   color: white;
-   border: none;
-   border-radius: 0.5rem;
-   cursor: pointer;
-   transition: background-color 0.2s ease;
- }
- 
- button:hover {
-   background-color: #5591A9; 
- }
- 
- button:disabled {
-   background-color: #6AB7D5; 
-   cursor: not-allowed;
- }
- 
- .error-message {
-   color: #FF6B6B; 
-   font-size: 0.9rem;
-   text-align: center;
-   margin-top: -0.5rem;
- }
- 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(to bottom, #6ab7d5, #ffffff);
+  font-family: "Roboto", sans-serif;
+  color: #0a2a37;
+}
+
+.formularioCadastro {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 500px;
+  border: 1px solid #6ab7d5;
+}
+
+.formularioCadastro h1 {
+  text-align: center;
+  color: #0a2a37;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.formularioCadastro h2 {
+  text-align: center;
+  color: #5591a9;
+  font-size: 1.125rem;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #0a2a37;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #6ab7d5;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  background-color: white;
+  color: #0a2a37;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #42a5f6;
+  box-shadow: 0 0 0 3px rgba(66, 165, 246, 0.1);
+}
+
+.form-group input[aria-invalid="true"] {
+  border-color: #ef4444;
+}
+
+.form-group input::placeholder {
+  color: #94a3b8;
+}
+
+.submit-button,
+.google-button {
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.submit-button {
+  background-color: #42a5f6;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.submit-button:hover {
+  background-color: #5591a9;
+}
+
+.submit-button:disabled {
+  background-color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.google-button {
+  background-color: white;
+  color: #0a2a37;
+  border: 2px solid #42a5f6;
+}
+
+.google-button:hover {
+  background-color: #6ab7d5;
+  color: white;
+}
+
+.google-button:disabled {
+  border-color: #94a3b8;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+.message-container {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 0.375rem;
+}
+
+.message-container.error {
+  background-color: #fef2f2;
+  color: #ef4444;
+  border: 1px solid #fecaca;
+}
+
+@media (max-width: 640px) {
+  .formularioCadastro {
+    padding: 1.5rem;
+  }
+
+  .formularioCadastro h1 {
+    font-size: 1.75rem;
+  }
+
+  .formularioCadastro h2 {
+    font-size: 1rem;
+  }
+
+  .form-group input {
+    font-size: 0.875rem;
+  }
+
+  .submit-button,
+  .google-button {
+    font-size: 0.875rem;
+    padding: 0.625rem 1.25rem;
+  }
+}

@@ -1,0 +1,24 @@
+.message-container {
+  padding: 10px 15px;
+  border-radius: 4px;
+  margin: 10px 0;
+  font-size: 14px;
+}
+
+.message-container.error {
+  background-color: #ffebee;
+  color: #c62828;
+  border: 1px solid #ef9a9a;
+}
+
+.message-container.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  border: 1px solid #a5d6a7;
+}
+
+.message-container.warning {
+  background-color: #fff3e0;
+  color: #ef6c00;
+  border: 1px solid #ffcc80;
+}
