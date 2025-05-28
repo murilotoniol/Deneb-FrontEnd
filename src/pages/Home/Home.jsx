@@ -9,7 +9,7 @@ import { useAuth } from "../../services/AuthContext";
 
 export default function Home() {
   const navigate = useNavigate();
-  const { user } = useAuth(); // ✅
+  const { user } = useAuth();
 
   const goToOfertarServico = () => {
     navigate("/ofertaservico");

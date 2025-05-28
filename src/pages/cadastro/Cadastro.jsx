@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import "../cadastro/Cadastro.css";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
-import { auth } from "../../services/firebase";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/useAuth";
 import {
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  signInWithPopup,
-} from "firebase/auth";
+  validateCPF,
+  validatePhone,
+  validatePassword,
+  validateDate,
+} from "../../utils/validation.js";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 
 export default function Cadastro() {
+  const navigate = useNavigate();
+  const { loading, error: authError, registerWithEmail } = useAuth();
+
   const [formData, setFormData] = useState({
     first_name: "",
     last_name: "",
@@ -20,146 +25,210 @@ export default function Cadastro() {
     confirmPassword: "",
   });
 
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const [formErrors, setFormErrors] = useState({});
+  const [submitAttempted, setSubmitAttempted] = useState(false);
+
+  const validateForm = () => {
+    const errors = {};
+
+    if (!formData.first_name.trim()) {
+      errors.first_name = "Nome é obrigatório";
+    }
+
+    if (!formData.last_name.trim()) {
+      errors.last_name = "Sobrenome é obrigatório";
+    }
+
+    if (!formData.email.trim()) {
+      errors.email = "Email é obrigatório";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      errors.email = "Email inválido";
+    }
+
+    if (!validateCPF(formData.cpf)) {
+      errors.cpf = "CPF inválido";
+    }
+
+    if (!validatePhone(formData.phone_number)) {
+      errors.phone_number = "Telefone inválido";
+    }
+
+    if (!validateDate(formData.birth_date)) {
+      errors.birth_date = "Data de nascimento inválida";
+    }
+
+    const passwordValidation = validatePassword(formData.password);
+    if (!passwordValidation.isValid) {
+      errors.password =
+        "A senha deve conter pelo menos 8 caracteres, uma letra maiúscula, uma minúscula, um número e um caractere especial";
+    }
+
+    if (formData.password !== formData.confirmPassword) {
+      errors.confirmPassword = "As senhas não coincidem";
+    }
+
+    return errors;
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleRegister = async () => {
-    setLoading(true);
-    setError(null);
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setSubmitAttempted(true);
 
-    const {
-      email,
-      password,
-      confirmPassword,
-      cpf,
-      first_name,
-      last_name,
-      phone_number,
-      birth_date,
-    } = formData;
+    const errors = validateForm();
+    setFormErrors(errors);
 
-    if (password !== confirmPassword) {
-      setError("As senhas não coincidem.");
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredential.user;
-
-      const db = getFirestore();
-      await setDoc(doc(db, "users", user.uid), {
-        first_name,
-        last_name,
-        cpf,
-        phone_number,
-        birth_date,
-        email: user.email,
-      });
-
-      alert("Usuário cadastrado com sucesso!");
-    } catch (error) {
-      console.error("Erro ao cadastrar:", error);
-      setError("Erro ao registrar: " + error.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const signInWithGoogle = async () => {
-    const provider = new GoogleAuthProvider();
-    try {
-      await signInWithPopup(auth, provider);
-      alert("Login com Google realizado com sucesso!");
-    } catch (error) {
-      console.log("Erro no login com Google:", error);
+    if (Object.keys(errors).length === 0) {
+      const result = await registerWithEmail(formData);
+      if (result.success) {
+        navigate("/login");
+      }
     }
   };
 
   return (
     <div className="cadastro">
-      <form className="formularioCadastro">
+      <form className="formularioCadastro" onSubmit={handleRegister}>
         <h1>Cadastro</h1>
         <h2>Preencha os dados abaixo:</h2>
 
-        <input
-          type="text"
-          name="first_name"
-          placeholder="Nome"
-          value={formData.first_name}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="last_name"
-          placeholder="Sobrenome"
-          value={formData.last_name}
-          onChange={handleChange}
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="cpf"
-          placeholder="CPF"
-          value={formData.cpf}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="phone_number"
-          placeholder="Telefone"
-          value={formData.phone_number}
-          onChange={handleChange}
-        />
-        <input
-          type="text"
-          name="birth_date"
-          placeholder="Data de Nascimento"
-          value={formData.birth_date}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Senha"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        <input
-          type="password"
-          name="confirmPassword"
-          placeholder="Confirme Senha"
-          value={formData.confirmPassword}
-          onChange={handleChange}
-        />
+        <div className="form-group">
+          <label htmlFor="first_name">Nome</label>
+          <input
+            id="first_name"
+            type="text"
+            name="first_name"
+            value={formData.first_name}
+            onChange={handleChange}
+            aria-label="Nome"
+            aria-invalid={!!formErrors.first_name}
+          />
+          {formErrors.first_name && (
+            <ErrorMessage message={formErrors.first_name} />
+          )}
+        </div>
 
-        {error && <p className="error-message">{error}</p>}
+        <div className="form-group">
+          <label htmlFor="last_name">Sobrenome</label>
+          <input
+            id="last_name"
+            type="text"
+            name="last_name"
+            value={formData.last_name}
+            onChange={handleChange}
+            aria-label="Sobrenome"
+            aria-invalid={!!formErrors.last_name}
+          />
+          {formErrors.last_name && (
+            <ErrorMessage message={formErrors.last_name} />
+          )}
+        </div>
 
-        <button type="button" onClick={handleRegister} disabled={loading}>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
+          <input
+            id="email"
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            aria-label="Email"
+            aria-invalid={!!formErrors.email}
+          />
+          {formErrors.email && <ErrorMessage message={formErrors.email} />}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="cpf">CPF</label>
+          <input
+            id="cpf"
+            type="text"
+            name="cpf"
+            value={formData.cpf}
+            onChange={handleChange}
+            aria-label="CPF"
+            aria-invalid={!!formErrors.cpf}
+            placeholder="000.000.000-00"
+            maxLength={14}
+          />
+          {formErrors.cpf && <ErrorMessage message={formErrors.cpf} />}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="phone_number">Telefone</label>
+          <input
+            id="phone_number"
+            type="text"
+            name="phone_number"
+            value={formData.phone_number}
+            onChange={handleChange}
+            aria-label="Telefone"
+            aria-invalid={!!formErrors.phone_number}
+            placeholder="(00) 00000-0000"
+            maxLength={15}
+          />
+          {formErrors.phone_number && (
+            <ErrorMessage message={formErrors.phone_number} />
+          )}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="birth_date">Data de Nascimento</label>
+          <input
+            id="birth_date"
+            type="text"
+            name="birth_date"
+            value={formData.birth_date}
+            onChange={handleChange}
+            aria-label="Data de Nascimento"
+            aria-invalid={!!formErrors.birth_date}
+            placeholder="DD/MM/AAAA"
+            maxLength={10}
+          />
+          {formErrors.birth_date && (
+            <ErrorMessage message={formErrors.birth_date} />
+          )}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="password">Senha</label>
+          <input
+            id="password"
+            type="password"
+            name="password"
+            value={formData.password}
+            onChange={handleChange}
+            aria-label="Senha"
+            aria-invalid={!!formErrors.password}
+          />
+          {formErrors.password && (
+            <ErrorMessage message={formErrors.password} />
+          )}
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="confirmPassword">Confirme a Senha</label>
+          <input
+            id="confirmPassword"
+            type="password"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            aria-label="Confirme a Senha"
+            aria-invalid={!!formErrors.confirmPassword}
+          />
+          {formErrors.confirmPassword && (
+            <ErrorMessage message={formErrors.confirmPassword} />
+          )}
+        </div>
+
+        {authError && <ErrorMessage message={authError} type="error" />}
+
+        <button type="submit" disabled={loading} className="submit-button">
           {loading ? "Registrando..." : "Registrar"}
-        </button>
-
-        <button
-          type="button"
-          onClick={signInWithGoogle}
-          className="google-button"
-        >
-          Entrar com Google
         </button>
       </form>
     </div>
