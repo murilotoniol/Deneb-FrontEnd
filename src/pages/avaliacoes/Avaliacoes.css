@@ -1,0 +1,97 @@
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background-color: #f7f8fa;
+    margin: 0;
+    padding: 0;
+    color: #333;
+  }
+  
+  .avaliacoes-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f7f8fa;
+  }
+  
+  .avaliacoes-content {
+    flex: 1;
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 7rem 1.5rem 2rem;
+    width: 100%;
+  }
+  
+  .avaliacoes-titulo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 24px;
+    color: #222;
+  }
+  
+  /* Lista com espaçamento entre cards */
+  .avaliacoes-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 2rem;
+  }
+  
+  /* Card individual */
+  .avaliacao-card {
+    background-color: #fff;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+  }
+  
+  /* Foto do usuário */
+  .avaliacao-foto {
+    width: 48px;
+    height: 48px;
+    border-radius: 999px;
+    object-fit: cover;
+  }
+  
+  /* Conteúdo do card */
+  .avaliacao-conteudo {
+    flex: 1;
+  }
+  
+  /* Cabeçalho com nome e data */
+  .avaliacao-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+  
+  .avaliacao-nome {
+    font-weight: 600;
+    font-size: 16px;
+    color: #111;
+  }
+  
+  .avaliacao-data {
+    font-size: 13px;
+    color: #888;
+  }
+  
+  /* Estrelas */
+  .estrelas {
+    display: flex;
+    gap: 4px;
+    color: #facc15;
+    margin: 4px 0;
+  }
+  
+  /* Comentário */
+  .avaliacao-comentario {
+    color: #444;
+    font-size: 15px;
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+  

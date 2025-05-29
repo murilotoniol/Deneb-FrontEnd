@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import "../cadastro/Cadastro.css";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
-import {
-  validateCPF,
-  validatePhone,
-  validatePassword,
-  validateDate,
-} from "../../utils/validation.js";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { auth } from "../../services/firebase";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 export default function Cadastro() {
   const navigate = useNavigate();
@@ -90,147 +86,32 @@ export default function Cadastro() {
   };
 
   return (
-    <div className="cadastro">
-      <form className="formularioCadastro" onSubmit={handleRegister}>
-        <h1>Cadastro</h1>
-        <h2>Preencha os dados abaixo:</h2>
+    <div className="cadastro-container">
+      <Header />
+      <div className="cadastro">
+        <form className="formularioCadastro">
+          <h1>Cadastro</h1>
+          <h2>Preencha os dados abaixo:</h2>
 
-        <div className="form-group">
-          <label htmlFor="first_name">Nome</label>
-          <input
-            id="first_name"
-            type="text"
-            name="first_name"
-            value={formData.first_name}
-            onChange={handleChange}
-            aria-label="Nome"
-            aria-invalid={!!formErrors.first_name}
-          />
-          {formErrors.first_name && (
-            <ErrorMessage message={formErrors.first_name} />
-          )}
-        </div>
+          <input type="text" name="first_name" placeholder="Nome" value={formData.first_name} onChange={handleChange} />
+          <input type="text" name="last_name" placeholder="Sobrenome" value={formData.last_name} onChange={handleChange} />
+          <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
+          <input type="text" name="phone_number" placeholder="Telefone" value={formData.phone_number} onChange={handleChange} />
+          <input type="text" name="birth_date" placeholder="Data de Nascimento" value={formData.birth_date} onChange={handleChange} />
+          <input type="password" name="password" placeholder="Senha" value={formData.password} onChange={handleChange} />
 
-        <div className="form-group">
-          <label htmlFor="last_name">Sobrenome</label>
-          <input
-            id="last_name"
-            type="text"
-            name="last_name"
-            value={formData.last_name}
-            onChange={handleChange}
-            aria-label="Sobrenome"
-            aria-invalid={!!formErrors.last_name}
-          />
-          {formErrors.last_name && (
-            <ErrorMessage message={formErrors.last_name} />
-          )}
-        </div>
+          {error && <p className="error-message">{error}</p>}
 
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            id="email"
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            aria-label="Email"
-            aria-invalid={!!formErrors.email}
-          />
-          {formErrors.email && <ErrorMessage message={formErrors.email} />}
-        </div>
+          <button type="button" onClick={handleRegister} disabled={loading}>
+            {loading ? "Registrando..." : "Registrar"}
+          </button>
 
-        <div className="form-group">
-          <label htmlFor="cpf">CPF</label>
-          <input
-            id="cpf"
-            type="text"
-            name="cpf"
-            value={formData.cpf}
-            onChange={handleChange}
-            aria-label="CPF"
-            aria-invalid={!!formErrors.cpf}
-            placeholder="000.000.000-00"
-            maxLength={14}
-          />
-          {formErrors.cpf && <ErrorMessage message={formErrors.cpf} />}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="phone_number">Telefone</label>
-          <input
-            id="phone_number"
-            type="text"
-            name="phone_number"
-            value={formData.phone_number}
-            onChange={handleChange}
-            aria-label="Telefone"
-            aria-invalid={!!formErrors.phone_number}
-            placeholder="(00) 00000-0000"
-            maxLength={15}
-          />
-          {formErrors.phone_number && (
-            <ErrorMessage message={formErrors.phone_number} />
-          )}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="birth_date">Data de Nascimento</label>
-          <input
-            id="birth_date"
-            type="text"
-            name="birth_date"
-            value={formData.birth_date}
-            onChange={handleChange}
-            aria-label="Data de Nascimento"
-            aria-invalid={!!formErrors.birth_date}
-            placeholder="DD/MM/AAAA"
-            maxLength={10}
-          />
-          {formErrors.birth_date && (
-            <ErrorMessage message={formErrors.birth_date} />
-          )}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="password">Senha</label>
-          <input
-            id="password"
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            aria-label="Senha"
-            aria-invalid={!!formErrors.password}
-          />
-          {formErrors.password && (
-            <ErrorMessage message={formErrors.password} />
-          )}
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="confirmPassword">Confirme a Senha</label>
-          <input
-            id="confirmPassword"
-            type="password"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            aria-label="Confirme a Senha"
-            aria-invalid={!!formErrors.confirmPassword}
-          />
-          {formErrors.confirmPassword && (
-            <ErrorMessage message={formErrors.confirmPassword} />
-          )}
-        </div>
-
-        {authError && <ErrorMessage message={authError} type="error" />}
-
-        <button type="submit" disabled={loading} className="submit-button">
-          {loading ? "Registrando..." : "Registrar"}
-        </button>
-      </form>
+          <button type="button" onClick={signInWithGoogle} className="google-button">
+            Entrar com Google
+          </button>
+        </form>
+      </div>
+      <Footer />
     </div>
   );
 }

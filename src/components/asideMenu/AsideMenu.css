@@ -1,0 +1,65 @@
+.aside-menu {
+    position: fixed;
+    left: 0;
+    top: 7%; /* Alinha com o Header existente */
+    width: 250px;
+    height: 100vh;
+    background-color: #0A2A37;
+    color: #6AB7D5;
+    padding: 2rem 1rem;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    z-index: 5;
+}
+
+.aside-nav {
+    height: 100%;
+}
+
+.menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.menu-item {
+    width: 100%;
+}
+
+.menu-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: transparent;
+    border: none;
+    border-radius: 0.5rem;
+    color: #6AB7D5;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.menu-button:hover {
+    background-color: rgba(66, 165, 246, 0.1);
+    color: #42A5F6;
+}
+
+.menu-button span {
+    font-family: "Roboto", sans-serif;
+}
+
+/* Estilo para o ícone */
+.menu-button svg {
+    min-width: 20px;
+    transition: transform 0.2s ease;
+}
+
+.menu-button:hover svg {
+    transform: scale(1.1);
+} 
+

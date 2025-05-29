@@ -1,9 +1,7 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import RecuperarSenha from "../recuperarSenha/RecuperarSenha";
-import "./styles.css";
+import React, { useState } from "react"
+import { Link, useNavigate } from 'react-router-dom';
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import '../login/styles.css'
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -13,117 +11,61 @@ export default function Login() {
   const navigate = useNavigate();
   const { loading, loginWithEmail, signInWithGoogle } = useAuth();
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+    const handleLogin = async () => {
+        try {
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            console.log("Usuário logado:", userCredential.user);
+            navigate("/");
+        } catch (error) {
+            alert("Erro ao logar: " + error.message);
+        }
+    };
 
-    if (!email || !password) {
-      setMessage("Por favor, preencha todos os campos");
-      setMessageType("error");
-      return;
-    }
+    return (
+        <div className="login-container">
+            <main>
+                <div className="formulario">
+                    <form className="forms">
+                        <h1>Entrar</h1>
+                        <div className="input-field">
+                            <label htmlFor="email">Email:</label>
+                            <input 
+                                id="email" 
+                                placeholder="Digite seu email" 
+                                type="email" 
+                                value={email} 
+                                onChange={e => setEmail(e.target.value)} 
+                            />
+                        </div>
+                        <div className="input-field">
+                            <label htmlFor="password">Senha:</label>
+                            <input 
+                                id="password" 
+                                placeholder="Digite sua senha" 
+                                type="password" 
+                                value={password} 
+                                onChange={e => setPassword(e.target.value)} 
+                            />
+                        </div>
 
-    const result = await loginWithEmail(email, password);
-    if (result.success) {
-      setMessage("Login realizado com sucesso!");
-      setMessageType("success");
-      navigate("/");
-    } else {
-      setMessage(result.error);
-      setMessageType("error");
-    }
-  };
+                        <div className="recall-forget">
+                            <label>
+                                <input type="checkbox" />
+                                Lembrar de mim
+                            </label>
+                            <a href="#">Esqueceu a senha?</a>
+                        </div>
 
-  const handleGoogleSignIn = async () => {
-    const result = await signInWithGoogle();
-    if (result.success) {
-      navigate("/");
-    } else {
-      setMessage(result.error);
-      setMessageType("error");
-    }
-  };
+                        <button type="button" onClick={handleLogin}>Entrar</button>
 
-  return (
-    <main>
-      <div className="formulario">
-        <form className="forms" onSubmit={handleLogin}>
-          <h1>Entrar</h1>
-
-          <div className="input-field">
-            <label htmlFor="email">Email</label>
-            <input
-              id="email"
-              type="email"
-              name="email"
-              placeholder="Digite seu email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              aria-label="Email"
-              aria-required="true"
-            />
-          </div>
-
-          <div className="input-field">
-            <label htmlFor="password">Senha</label>
-            <input
-              id="password"
-              type="password"
-              name="password"
-              placeholder="Digite sua senha"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              aria-label="Senha"
-              aria-required="true"
-            />
-          </div>
-
-          {message && <ErrorMessage message={message} type={messageType} />}
-
-          <div className="recall-forget">
-            <label>
-              <input type="checkbox" />
-              Lembrar de mim
-            </label>
-            <Link
-              to="/recuperar-senha"
-              className="forget-password-link"
-              aria-label="Recuperar senha"
-            >
-              Esqueceu a senha?
-            </Link>
-          </div>
-
-          <button
-            type="submit"
-            disabled={loading}
-            className="submit-button"
-            aria-label={loading ? "Entrando..." : "Entrar"}
-          >
-            {loading ? "Entrando..." : "Entrar"}
-          </button>
-
-          <button
-            type="button"
-            onClick={handleGoogleSignIn}
-            disabled={loading}
-            className="google-button"
-            aria-label="Entrar com Google"
-          >
-            Entrar com Google
-          </button>
-
-          <div className="signup-link">
-            <p>
-              Não tem uma conta?{" "}
-              <Link to="/registrar" aria-label="Criar conta">
-                Registrar
-              </Link>
-            </p>
-          </div>
-        </form>
-      </div>
-    </main>
-  );
+                        <div className="signup-link">
+                            <p>
+                                Não tem uma conta? <Link to='/registrar'>Registrar</Link>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </main>
+        </div>
+    );
 }
