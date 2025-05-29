@@ -2,8 +2,6 @@ import React, { useState } from "react"
 import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import '../login/styles.css'
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
 
 export default function Login() {
     const [email, setEmail] = useState("");
@@ -23,7 +21,6 @@ export default function Login() {
 
     return (
         <div className="login-container">
-            <Header />
             <main>
                 <div className="formulario">
                     <form className="forms">
@@ -67,7 +64,6 @@ export default function Login() {
                     </form>
                 </div>
             </main>
-            <Footer />
         </div>
     );
 }

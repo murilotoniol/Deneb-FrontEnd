@@ -23,7 +23,6 @@ function App() {
             <Route path="/avaliacoes" element={<Avaliacoes />} />
             <Route path="/mensagens" element={<Mensagens />} />
           </Routes>
-
     </div>
   )
 }
