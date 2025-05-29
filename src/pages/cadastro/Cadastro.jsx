@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import "../cadastro/Cadastro.css";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
-import { auth } from "../../services/firebase";
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 
@@ -93,12 +90,48 @@ export default function Cadastro() {
           <h1>Cadastro</h1>
           <h2>Preencha os dados abaixo:</h2>
 
-          <input type="text" name="first_name" placeholder="Nome" value={formData.first_name} onChange={handleChange} />
-          <input type="text" name="last_name" placeholder="Sobrenome" value={formData.last_name} onChange={handleChange} />
-          <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} />
-          <input type="text" name="phone_number" placeholder="Telefone" value={formData.phone_number} onChange={handleChange} />
-          <input type="text" name="birth_date" placeholder="Data de Nascimento" value={formData.birth_date} onChange={handleChange} />
-          <input type="password" name="password" placeholder="Senha" value={formData.password} onChange={handleChange} />
+          <input
+            type="text"
+            name="first_name"
+            placeholder="Nome"
+            value={formData.first_name}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="last_name"
+            placeholder="Sobrenome"
+            value={formData.last_name}
+            onChange={handleChange}
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={formData.email}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="phone_number"
+            placeholder="Telefone"
+            value={formData.phone_number}
+            onChange={handleChange}
+          />
+          <input
+            type="text"
+            name="birth_date"
+            placeholder="Data de Nascimento"
+            value={formData.birth_date}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Senha"
+            value={formData.password}
+            onChange={handleChange}
+          />
 
           {error && <p className="error-message">{error}</p>}
 
@@ -106,7 +139,11 @@ export default function Cadastro() {
             {loading ? "Registrando..." : "Registrar"}
           </button>
 
-          <button type="button" onClick={signInWithGoogle} className="google-button">
+          <button
+            type="button"
+            onClick={signInWithGoogle}
+            className="google-button"
+          >
             Entrar com Google
           </button>
         </form>
