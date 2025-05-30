@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import "../Header/Header.css";
 import logo from "../../assets/teste.png";
 import AsideMenu from "../../components/asideMenu/AsideMenu";
+import MenuIcon from '@mui/icons-material/Menu';
 
 export default function Header() {
   const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
@@ -37,8 +38,10 @@ export default function Header() {
           <li><Link to="/contact">Contato</Link></li>
         </ul>
       </nav>
-      <button onClick={openMenu}>Menu</button>
-       {isMenuOpen && <AsideMenu open={isMenuOpen} onClose={closeMenu} />} 
+      <button onClick={openMenu} style={{ backgroundColor: 'transparent', border: 'none', cursor: 'pointer' }}>
+        <MenuIcon />
+      </button>
+      {isMenuOpen && <AsideMenu open={isMenuOpen} onClose={closeMenu} />} 
     </header>
   );
 }

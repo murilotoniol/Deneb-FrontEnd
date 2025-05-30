@@ -50,7 +50,7 @@
     color: #42A5F6;
   }
   
-  .botao {
+  /*.botao {
     padding: 8px 16px;
     background: #42A5F6;
     color: white;
@@ -63,7 +63,7 @@
   
   .botao:hover {
     background: #5591A9;
-  }
+  }*/
   
   .image {
     width: 5rem;
