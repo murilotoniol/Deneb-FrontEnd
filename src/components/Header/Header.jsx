@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import "../Header/Header.css";
 import logo from "../../assets/teste.png";
 import AsideMenu from "../../components/asideMenu/AsideMenu";
@@ -13,15 +13,14 @@ export default function Header() {
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollPos = window.pageYOffset;
-      const isVisible =
-        prevScrollPos > currentScrollPos || currentScrollPos < 10;
+      const isVisible = prevScrollPos > currentScrollPos || currentScrollPos < 10;
 
       setPrevScrollPos(currentScrollPos);
       setVisible(isVisible);
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, [prevScrollPos]);
 
   const openMenu = () => setIsMenuOpen(true);
@@ -29,6 +28,7 @@ export default function Header() {
 
   return (
     <header className={`Header ${visible ? "" : "Header--hidden"}`}>
+
       <div className="image">
         <img src={logo} alt="teste" className="logo" />
       </div>

@@ -1,3 +1,4 @@
+
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -81,8 +82,7 @@ export default function AsideMenu({ open, onClose, user }) {
         </>
       )}
     </Box>
-  );
-
+  ); 
   return (
     <div>
       <Drawer open={open} onClose={onClose} anchor="right">
