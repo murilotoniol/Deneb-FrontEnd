@@ -1,11 +1,12 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
+
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
 
 // Adicionar imports para ícones se necessário no futuro
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -17,7 +18,6 @@ import ListItemText from '@mui/material/ListItemText';
 // import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 export default function AsideMenu({ open, onClose, user }) {
-
   const DrawerList = (
     <Box
       sx={{ width: 250 }}
@@ -29,7 +29,7 @@ export default function AsideMenu({ open, onClose, user }) {
         // Conteúdo para usuário logado
         <>
           <List>
-            {['Perfil', 'Avaliações', 'Mensagens'].map((text, index) => (
+            {["Perfil", "Avaliações", "Mensagens"].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
                   {/* Adicionar ícone aqui se desejar, ex: <ListItemIcon>{index === 0 ? <AccountCircleIcon /> : index === 1 ? <AssessmentIcon /> : <MailIcon />}</ListItemIcon> */}
@@ -40,7 +40,7 @@ export default function AsideMenu({ open, onClose, user }) {
           </List>
           <Divider />
           <List>
-            {['Sair'].map((text, index) => (
+            {["Sair"].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
                   {/* Adicionar ícone aqui se desejar, ex: <ListItemIcon><ExitToAppIcon /></ListItemIcon> */}
@@ -54,7 +54,7 @@ export default function AsideMenu({ open, onClose, user }) {
         // Conteúdo para usuário não logado
         <>
           <List>
-            {['Entrar'].map((text, index) => (
+            {["Entrar"].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
                   {/* Adicionar ícone aqui se desejar, ex: <ListItemIcon><LoginIcon /></ListItemIcon> */}
@@ -65,20 +65,24 @@ export default function AsideMenu({ open, onClose, user }) {
           </List>
           <Divider />
           <List>
-            {['Tema Claro/Escuro'].map((text, index) => ( // Botão de Tema
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  {/* Adicionar ícone aqui se desejar, ex: <ListItemIcon><Brightness4Icon /></ListItemIcon> ou <Brightness7Icon /> */}
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
+            {["Tema Claro/Escuro"].map(
+              (
+                text,
+                index // Botão de Tema
+              ) => (
+                <ListItem key={text} disablePadding>
+                  <ListItemButton>
+                    {/* Adicionar ícone aqui se desejar, ex: <ListItemIcon><Brightness4Icon /></ListItemIcon> ou <Brightness7Icon /> */}
+                    <ListItemText primary={text} />
+                  </ListItemButton>
+                </ListItem>
+              )
+            )}
           </List>
         </>
       )}
     </Box>
-  );
-
+  ); 
   return (
     <div>
       <Drawer open={open} onClose={onClose} anchor="right">

@@ -54,8 +54,8 @@ export default function RedefinirSenha() {
       return;
     }
 
-    if (newPassword.length < 6) {
-      setMessage("A senha deve ter pelo menos 6 caracteres");
+    if (newPassword.length < 8) {
+      setMessage("A senha deve ter pelo menos 8 caracteres");
       setMessageType("error");
       setLoading(false);
       return;
