@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #6AB7D5, #ffffff);
+  background: linear-gradient(to bottom, #6ab7d5, #ffffff);
 }
 
 .find-content {
@@ -17,7 +17,7 @@
   font-size: 2.5rem;
   text-align: center;
   font-weight: bold;
-  color: #0A2A37;
+  color: #0a2a37;
   margin-bottom: 2.5rem;
 }
 
@@ -36,14 +36,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  border: 1px solid #6AB7D5;
+  border: 1px solid #6ab7d5;
 }
 
 .service-header {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #42A5F6;
+  color: #42a5f6;
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
@@ -55,7 +55,7 @@
 }
 
 .service-description {
-  color: #0A2A37;
+  color: #0a2a37;
   margin-bottom: 1rem;
 }
 
@@ -63,7 +63,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 0.95rem;
-  color: #5591A9;
+  color: #5591a9;
   margin-bottom: 1rem;
 }
 
@@ -75,9 +75,9 @@
 }
 
 .btn-outline {
-  border: 2px solid #42A5F6;
+  border: 2px solid #42a5f6;
   background-color: transparent;
-  color: #42A5F6;
+  color: #42a5f6;
   padding: 0.5rem 1rem;
   border-radius: 9999px;
   font-weight: 600;
@@ -87,6 +87,49 @@
 }
 
 .btn-outline:hover {
-  background-color: #6AB7D5;
+  background-color: #6ab7d5;
   color: #ffffff;
+}
+
+.loading-message,
+.error-message,
+.no-services-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #6ab7d5;
+  margin: 2rem 0;
+}
+
+.loading-icon {
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 1rem;
+  color: #42a5f6;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-message p {
+  color: #dc3545;
+  margin-bottom: 1rem;
+}
+
+.no-services-message p {
+  color: #5591a9;
+  font-size: 1.1rem;
 }

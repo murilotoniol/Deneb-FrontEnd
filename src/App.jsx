@@ -11,6 +11,7 @@ import Avaliacoes from "./pages/avaliacoes/Avaliacoes";
 import Mensagens from "./pages/mensagens/Mensagens";
 import RecuperarSenha from "./pages/recuperarSenha/RecuperarSenha";
 import RedefinirSenha from "./pages/recuperarSenha/RedefinirSenha";
+import DetalhesServico from "./pages/DetalheServico/DetalheServico";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/registrar" element={<Cadastro />} />
         <Route path="/ofertaservico" element={<OfertaServiço />} />
         <Route path="/procurarservicos" element={<ProcurarServiços />} />
+        <Route path="/servico/:serviceId" element={<DetalhesServico />} />
         <Route path="/avaliacoes" element={<Avaliacoes />} />
         <Route path="/mensagens" element={<Mensagens />} />
         <Route path="/redefinir-senha" element={<RedefinirSenha />} />
