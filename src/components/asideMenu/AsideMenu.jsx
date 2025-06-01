@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -18,21 +17,23 @@ import ListItemText from "@mui/material/ListItemText";
 // import Brightness7Icon from '@mui/icons-material/Brightness7';
 
 export default function AsideMenu({ open, onClose, user }) {
+  const headerHeight = '64px';
+
   const DrawerList = (
     <Box
-      sx={{ width: 250 }}
+      sx={{ 
+        width: 250,
+      }}
       role="presentation"
       onClick={onClose}
       onKeyDown={onClose}
     >
       {user ? (
-        // Conteúdo para usuário logado
         <>
           <List>
             {["Perfil", "Avaliações", "Mensagens"].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
-                  {/* Adicionar ícone aqui se desejar, ex: <ListItemIcon>{index === 0 ? <AccountCircleIcon /> : index === 1 ? <AssessmentIcon /> : <MailIcon />}</ListItemIcon> */}
                   <ListItemText primary={text} />
                 </ListItemButton>
               </ListItem>
@@ -43,7 +44,6 @@ export default function AsideMenu({ open, onClose, user }) {
             {["Sair"].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
-                  {/* Adicionar ícone aqui se desejar, ex: <ListItemIcon><ExitToAppIcon /></ListItemIcon> */}
                   <ListItemText primary={text} />
                 </ListItemButton>
               </ListItem>
@@ -51,13 +51,11 @@ export default function AsideMenu({ open, onClose, user }) {
           </List>
         </>
       ) : (
-        // Conteúdo para usuário não logado
         <>
           <List>
             {["Entrar"].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
-                  {/* Adicionar ícone aqui se desejar, ex: <ListItemIcon><LoginIcon /></ListItemIcon> */}
                   <ListItemText primary={text} />
                 </ListItemButton>
               </ListItem>
@@ -68,11 +66,10 @@ export default function AsideMenu({ open, onClose, user }) {
             {["Tema Claro/Escuro"].map(
               (
                 text,
-                index // Botão de Tema
+                index
               ) => (
                 <ListItem key={text} disablePadding>
                   <ListItemButton>
-                    {/* Adicionar ícone aqui se desejar, ex: <ListItemIcon><Brightness4Icon /></ListItemIcon> ou <Brightness7Icon /> */}
                     <ListItemText primary={text} />
                   </ListItemButton>
                 </ListItem>
@@ -83,9 +80,26 @@ export default function AsideMenu({ open, onClose, user }) {
       )}
     </Box>
   ); 
+
   return (
     <div>
-      <Drawer open={open} onClose={onClose} anchor="right">
+      <Drawer 
+        open={open} 
+        onClose={onClose} 
+        anchor="right"
+        PaperProps={{
+          sx: {
+            top: headerHeight,
+            height: 'auto',
+            maxHeight: `calc(100vh - ${headerHeight})`,
+            overflowY: 'auto',
+          },
+        }}
+        variant="temporary"
+        ModalProps={{
+          keepMounted: true,
+        }}
+      >
         {DrawerList}
       </Drawer>
     </div>

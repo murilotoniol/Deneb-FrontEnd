@@ -43,7 +43,7 @@ export default function Login() {
   };
 
   return (
-    <main>
+    <main className="login-page">
       <div className="formulario">
         <form className="forms" onSubmit={handleLogin}>
           <h1>Entrar</h1>

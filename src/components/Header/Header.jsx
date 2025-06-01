@@ -32,19 +32,15 @@ export default function Header() {
       <div className="image">
         <img src={logo} alt="teste" className="logo" />
       </div>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/">Inicio</Link>
-          </li>
-          <li>
-            <Link to="/procurarServiços">Serviços</Link>
-          </li>
-          <li>
-            <Link to="/contact">Contato</Link>
-          </li>
-        </ul>
-      </nav>
+      
+      <button className="button-anunciar">
+        <p>Anunciar</p>
+      </button>
+      
+      <Link to="/categorias" className="link-categorias">
+        <p>Categorias</p>
+      </Link>
+
       <button
         onClick={openMenu}
         style={{

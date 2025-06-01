@@ -4,7 +4,7 @@
   box-sizing: border-box;
 }
 
-main {
+.login-page {
   width: 100%;
   height: 100vh;
   overflow: hidden;
@@ -16,7 +16,7 @@ main {
 }
 
 .formulario {
-  width: 25%;
+  width: 22%;
   background: #fff;
   display: flex;
   justify-content: center;

@@ -32,7 +32,7 @@ export default function RecuperarSenha() {
   };
 
   return (
-    <main>
+    <main className="recuperar-senha-page">
       <div className="formulario">
         <div className="forms">
           <h1>Recuperar Senha</h1>

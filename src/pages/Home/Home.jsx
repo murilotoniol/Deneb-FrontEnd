@@ -25,7 +25,6 @@ export default function Home() {
 
       <section className="hero-section">
         <div className="hero-content">
-          {user && <p className="welcome-msg">Olá, {user.email}!</p>}
           <motion.h1
             className="home-title"
             initial={{ opacity: 0, y: -20 }}
