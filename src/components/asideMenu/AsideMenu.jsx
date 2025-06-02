@@ -43,7 +43,7 @@ export default function AsideMenu({ open, onClose }) {
           </List>
           <Divider />
           <List>
-            {["Serviços Oferecidos", "Serviços Contratados", "Sair"].map((text, index) => (
+            {["Serviços Contratados", "Sair"].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
                   <ListItemText primary={text} />
