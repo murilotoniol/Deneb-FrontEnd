@@ -6,6 +6,7 @@ import Divider from "@mui/material/Divider";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import { useAuth } from "../../services/AuthContext";
 
 // Adicionar imports para ícones se necessário no futuro
 // import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -16,8 +17,9 @@ import ListItemText from "@mui/material/ListItemText";
 // import Brightness4Icon from '@mui/icons-material/Brightness4';
 // import Brightness7Icon from '@mui/icons-material/Brightness7';
 
-export default function AsideMenu({ open, onClose, user }) {
+export default function AsideMenu({ open, onClose }) {
   const headerHeight = '64px';
+  const { user } = useAuth();
 
   const DrawerList = (
     <Box
@@ -31,7 +33,7 @@ export default function AsideMenu({ open, onClose, user }) {
       {user ? (
         <>
           <List>
-            {["Perfil", "Avaliações", "Mensagens"].map((text, index) => (
+            {["Perfil", "Meus Serviços", "Avaliações", "Mensagens"].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
                   <ListItemText primary={text} />
@@ -41,7 +43,7 @@ export default function AsideMenu({ open, onClose, user }) {
           </List>
           <Divider />
           <List>
-            {["Sair"].map((text, index) => (
+            {["Serviços Oferecidos", "Serviços Contratados", "Sair"].map((text, index) => (
               <ListItem key={text} disablePadding>
                 <ListItemButton>
                   <ListItemText primary={text} />
