@@ -7,19 +7,73 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { useAuth } from "../../services/AuthContext";
-
-// Adicionar imports para ícones se necessário no futuro
-// import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-// import AssessmentIcon from '@mui/icons-material/Assessment';
-// import MailIcon from '@mui/icons-material/Mail';
-// import ExitToAppIcon from '@mui/icons-material/ExitToApp';
-// import LoginIcon from '@mui/icons-material/Login';
-// import Brightness4Icon from '@mui/icons-material/Brightness4';
-// import Brightness7Icon from '@mui/icons-material/Brightness7';
+import "./AsideMenu.css";
+import { useNavigate } from "react-router-dom";
 
 export default function AsideMenu({ open, onClose }) {
+  const navigate = useNavigate();
+  const { user, logout } = useAuth();
   const headerHeight = '64px';
-  const { user } = useAuth();
+
+  const goToPerfil = () => {
+    navigate("/perfil");
+    onClose(); 
+  };
+
+  const goToMeusServicos = () => {
+    navigate("/meus-servicos");
+    onClose();
+  };
+
+  const goToAvaliacoes = () => {
+    navigate("/avaliacoes");
+    onClose();
+  };
+
+  const goToMensagens = () => {
+    navigate("/mensagens");
+    onClose();
+  };
+
+  const goToOfertarServico = () => {
+    navigate("/ofertaservico");
+    onClose();
+  };
+
+  const goToServicosContratados = () => {
+    navigate("/servicos-contratados");
+    onClose();
+  };
+
+  const handleLogout = () => {
+    logout();
+    onClose();
+  };
+
+  const goToEntrar = () => {
+    navigate("/login"); 
+    onClose();
+  };
+
+  const userMenuItems = [
+    { text: "Perfil", action: goToPerfil },
+    { text: "Meus Serviços", action: goToMeusServicos },
+    { text: "Avaliações", action: goToAvaliacoes },
+    { text: "Mensagens", action: goToMensagens },
+  ];
+
+  const userMenuItems2 = [
+    { text: "Serviços Contratados", action: goToServicosContratados },
+    { text: "Sair", action: handleLogout },
+  ];
+
+  const guestMenuItems = [
+    { text: "Entrar", action: goToEntrar },
+  ];
+
+  const themeMenuItems = [
+    { text: "Tema Claro/Escuro", action: () => { /* Lógica para trocar tema */ onClose(); } },
+  ];
 
   const DrawerList = (
     <Box
@@ -27,26 +81,24 @@ export default function AsideMenu({ open, onClose }) {
         width: 250,
       }}
       role="presentation"
-      onClick={onClose}
-      onKeyDown={onClose}
     >
       {user ? (
         <>
           <List>
-            {["Perfil", "Meus Serviços", "Avaliações", "Mensagens"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemText primary={text} />
+            {userMenuItems.map((item) => (
+              <ListItem key={item.text} disablePadding>
+                <ListItemButton onClick={item.action}>
+                  <ListItemText primary={item.text} />
                 </ListItemButton>
               </ListItem>
             ))}
           </List>
           <Divider />
           <List>
-            {["Serviços Contratados", "Sair"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemText primary={text} />
+            {userMenuItems2.map((item) => (
+              <ListItem key={item.text} disablePadding>
+                <ListItemButton onClick={item.action}>
+                  <ListItemText primary={item.text} />
                 </ListItemButton>
               </ListItem>
             ))}
@@ -55,28 +107,23 @@ export default function AsideMenu({ open, onClose }) {
       ) : (
         <>
           <List>
-            {["Entrar"].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemText primary={text} />
+            {guestMenuItems.map((item) => (
+              <ListItem key={item.text} disablePadding>
+                <ListItemButton onClick={item.action}>
+                  <ListItemText primary={item.text} />
                 </ListItemButton>
               </ListItem>
             ))}
           </List>
           <Divider />
           <List>
-            {["Tema Claro/Escuro"].map(
-              (
-                text,
-                index
-              ) => (
-                <ListItem key={text} disablePadding>
-                  <ListItemButton>
-                    <ListItemText primary={text} />
-                  </ListItemButton>
-                </ListItem>
-              )
-            )}
+            {themeMenuItems.map((item) => (
+              <ListItem key={item.text} disablePadding>
+                <ListItemButton onClick={item.action}>
+                  <ListItemText primary={item.text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
           </List>
         </>
       )}
@@ -84,7 +131,7 @@ export default function AsideMenu({ open, onClose }) {
   ); 
 
   return (
-    <div>
+    <div className="aside-menu">
       <Drawer 
         open={open} 
         onClose={onClose} 
@@ -95,6 +142,7 @@ export default function AsideMenu({ open, onClose }) {
             height: 'auto',
             maxHeight: `calc(100vh - ${headerHeight})`,
             overflowY: 'auto',
+            borderRadius: '10px',
           },
         }}
         variant="temporary"

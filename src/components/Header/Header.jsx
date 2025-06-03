@@ -1,56 +1,72 @@
 import React, { useState, useEffect } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "../Header/Header.css";
 import logo from "../../assets/teste.png";
 import AsideMenu from "../../components/asideMenu/AsideMenu";
 import MenuIcon from "@mui/icons-material/Menu";
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function Header() {
-  const [prevScrollPos, setPrevScrollPos] = useState(window.pageYOffset);
-  const [visible, setVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      const isVisible = prevScrollPos > currentScrollPos || currentScrollPos < 10;
-
-      setPrevScrollPos(currentScrollPos);
-      setVisible(isVisible);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [prevScrollPos]);
+  const navigate = useNavigate();
 
   const openMenu = () => setIsMenuOpen(true);
   const closeMenu = () => setIsMenuOpen(false);
 
-  return (
-    <header className={`Header ${visible ? "" : "Header--hidden"}`}>
+  const goToOfertarServico = () => {
+    navigate("/ofertaservico");
+  };
 
-      <div className="image">
+  const goToHome = () => {
+    navigate("/");
+  };
+
+  return (
+    <header className="Header">
+
+      <div className="image" onClick={goToHome} style={{ cursor: 'pointer' }}>
         <img src={logo} alt="teste" className="logo" />
       </div>
-      
-      <button className="button-anunciar">
-        <p>Anunciar</p>
-      </button>
-      
-      <Link to="/categorias" className="link-categorias">
-        <p>Categorias</p>
-      </Link>
 
-      <button
-        onClick={openMenu}
-        style={{
-          backgroundColor: "transparent",
-          border: "none",
-          cursor: "pointer",
-        }}
-      >
-        <MenuIcon />
-      </button>
+      {/* Barra de pesquisa */}
+      <div className="search-bar">
+        <SearchIcon style={{ color: "#666", marginLeft: "10px" }} />
+        <input type="text" placeholder="Serviço, usuário ou categoria" className="search-input" />
+      </div>
+
+      <div className="header-buttons">
+        <Link to="/categorias" className="link-categorias" class="link-categorias">
+          <p>Categorias</p>
+        </Link>
+
+        <button className="button-anunciar" 
+          type="button"
+          onClick={goToOfertarServico}
+        >
+          <p>Anunciar</p>
+        </button>
+
+        <button className="button-carrinho" style={{
+            backgroundColor: "transparent",
+            border: "none",
+            cursor: "pointer",
+          }}
+        >
+          <ShoppingCartIcon style={{ color: "#666" }} />
+        </button>
+
+        <button
+          onClick={openMenu}
+          style={{
+            backgroundColor: "transparent",
+            border: "none",
+            cursor: "pointer",
+          }}
+        >
+          <MenuIcon style={{ color: "#666" }} />
+        </button>
+      </div>
       {isMenuOpen && <AsideMenu open={isMenuOpen} onClose={closeMenu} />}
     </header>
   );

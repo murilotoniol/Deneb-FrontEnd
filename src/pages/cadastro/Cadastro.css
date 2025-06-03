@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(to bottom, #6ab7d5, #ffffff);
+  background-color: #f7f8fa;
   padding: 7rem 2rem 2rem;
 }
 
@@ -79,7 +79,7 @@ button:disabled {
   align-items: center;
   min-height: 100vh;
   padding: 20px;
-  background: linear-gradient(to bottom, #6ab7d5, #ffffff);
+  background-color: #f7f8fa;  
   font-family: "Roboto", sans-serif;
   color: #0a2a37;
 }

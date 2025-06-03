@@ -9,7 +9,7 @@ import { useAuth } from "../../services/AuthContext";
 
 export default function Home() {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { user, userData, loading } = useAuth();
 
   const goToOfertarServico = () => {
     navigate("/ofertaservico");
@@ -18,6 +18,14 @@ export default function Home() {
   const goToProcurarServico = () => {
     navigate("/procurarservicos");
   };
+
+  if (loading) {
+    return (
+      <main className="home-main" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <p>Carregando...</p>
+      </main>
+    );
+  }
 
   return (
     <main className="home-main">

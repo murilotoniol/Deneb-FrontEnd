@@ -61,3 +61,17 @@
   max-width: 500px;
   line-height: 1.6;
 }
+
+.hr-footer {
+  border: 0;
+  height: 1px;
+  background-color: #666;
+  margin: 20px 0;
+}
+
+.copyright-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}

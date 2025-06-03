@@ -20,7 +20,7 @@ export default function Footer() {
                   </div>
                   <div>
                     <p>
-                      Somos a solução para o mercado digital, disponibilizando uma plataforma moderna que permite que o comprador receba pelo produto / serviço desejado, e que o vendedor receba para sua venda. Tudo isso com praticidade e segurança.
+                      Somos a revolução no mercado de serviços, disponibilizando uma plataforma moderna que permite que o comprador decida entre diversos serviços para seu pet e em contato com o vendedor para a negociação. Tudo isso com praticidade e segurança.
                     </p>
                   </div>
                 </div>
@@ -71,7 +71,7 @@ export default function Footer() {
           </div>
         </div>
       </div>
-
+      <hr className="hr-footer" />
       {/* COPYRIGHT */}
       <div className="copyright-footer set-color">
         <div className="contaner">
