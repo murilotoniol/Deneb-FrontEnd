@@ -12,23 +12,26 @@ import Mensagens from "./pages/mensagens/Mensagens";
 import RecuperarSenha from "./pages/recuperarSenha/RecuperarSenha";
 import RedefinirSenha from "./pages/recuperarSenha/RedefinirSenha";
 import DetalhesServico from "./pages/DetalheServico/DetalheServico";
+import { MenuProvider } from "./components/MenuProvider/MenuProvider";
 
 function App() {
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/registrar" element={<Cadastro />} />
-        <Route path="/ofertaservico" element={<OfertaServiço />} />
-        <Route path="/procurarservicos" element={<ProcurarServiços />} />
-        <Route path="/servico/:serviceId" element={<DetalhesServico />} />
-        <Route path="/avaliacoes" element={<Avaliacoes />} />
-        <Route path="/mensagens" element={<Mensagens />} />
-        <Route path="/redefinir-senha" element={<RedefinirSenha />} />
-        <Route path="/recuperar-senha" element={<RecuperarSenha />} />
-      </Routes>
-    </div>
+    <MenuProvider>
+      <div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/registrar" element={<Cadastro />} />
+          <Route path="/ofertaservico" element={<OfertaServiço />} />
+          <Route path="/procurarservicos" element={<ProcurarServiços />} />
+          <Route path="/servico/:serviceId" element={<DetalhesServico />} />
+          <Route path="/avaliacoes" element={<Avaliacoes />} />
+          <Route path="/mensagens" element={<Mensagens />} />
+          <Route path="/redefinir-senha" element={<RedefinirSenha />} />
+          <Route path="/recuperar-senha" element={<RecuperarSenha />} />
+        </Routes>
+      </div>
+    </MenuProvider>
   );
 }
 

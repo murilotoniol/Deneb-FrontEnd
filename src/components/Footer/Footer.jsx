@@ -4,12 +4,12 @@ import logo from "../../assets/teste.png";
 
 export default function Footer() {
   return (
-    <footer className="hun-section-footer hun-footer layout-1">
+    <footer className="footer">
       <div className="content-footer set-color">
         <div className="container">
           <div className="row">
             {/* SOBRE */}
-            <div className="col-xl-6">
+            <div>
               <div className="widget">
                 <h3 className="title-widget">SOBRE</h3>
                 <div className="text-widget">
@@ -28,7 +28,7 @@ export default function Footer() {
             </div>
 
             {/* ACESSO RÁPIDO */}
-            <div className="col-sm-6 col-md-4 col-xl-2">
+            <div>
               <div className="widget">
                 <h3 className="title-widget">ACESSO RÁPIDO</h3>
                 <div className="text-widget">
@@ -43,7 +43,7 @@ export default function Footer() {
             </div>
 
             {/* COMO FUNCIONA */}
-            <div className="col-md-4 col-xl-2">
+            <div>
               <div className="widget">
                 <h3 className="title-widget">COMO FUNCIONA</h3>
                 <div className="text-widget">
@@ -56,7 +56,7 @@ export default function Footer() {
             </div>
 
             {/* INSTITUCIONAL */}
-            <div className="col-sm-6 col-md-4 col-xl-2">
+            <div>
               <div className="widget">
                 <h3 className="title-widget">INSTITUCIONAL</h3>
                 <div className="text-widget">
@@ -73,9 +73,9 @@ export default function Footer() {
       </div>
       <hr className="hr-footer" />
       {/* COPYRIGHT */}
-      <div className="copyright-footer set-color">
-        <div className="contaner">
-          <div className="content-copyright">
+      <div>
+        <div className="container">
+          <div className="copyright-footer">
             <p>Copyright © Deneb Corp 2025</p>
           </div>
         </div>

@@ -1,18 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import "../Header/Header.css";
 import logo from "../../assets/teste.png";
-import AsideMenu from "../../components/asideMenu/AsideMenu";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SearchIcon from '@mui/icons-material/Search';
+import { useMenu } from '../MenuProvider/MenuProvider';
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
-
-  const openMenu = () => setIsMenuOpen(true);
-  const closeMenu = () => setIsMenuOpen(false);
+  const { openMenu } = useMenu();
 
   const goToOfertarServico = () => {
     navigate("/ofertaservico");
@@ -24,7 +21,6 @@ export default function Header() {
 
   return (
     <header className="Header">
-
       <div className="image" onClick={goToHome} style={{ cursor: 'pointer' }}>
         <img src={logo} alt="teste" className="logo" />
       </div>
@@ -67,7 +63,6 @@ export default function Header() {
           <MenuIcon style={{ color: "#666" }} />
         </button>
       </div>
-      {isMenuOpen && <AsideMenu open={isMenuOpen} onClose={closeMenu} />}
     </header>
   );
 }

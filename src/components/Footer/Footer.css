@@ -1,16 +1,14 @@
-/* Footer.css */
-
-.hun-section-footer {
+.footer {
   background-color: #1c1c1c;
   color: #ffffff;
   padding: 60px 0 20px;
   font-family: 'Segoe UI', sans-serif;
-  width: 100%; /* Ocupa 100% da largura */
+  width: 100%;
 }
 
 .container {
-  width: 100%; /* Largura total */
-  padding: 0 60px; /* Espaçamento interno nas laterais */
+  width: 100%;
+  padding: 0 60px;
   box-sizing: border-box;
 }
 

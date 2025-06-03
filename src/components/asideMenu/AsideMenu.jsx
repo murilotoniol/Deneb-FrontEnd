@@ -136,6 +136,9 @@ export default function AsideMenu({ open, onClose }) {
         open={open} 
         onClose={onClose} 
         anchor="right"
+        disableScrollLock={true}
+        hideBackdrop={false}
+        elevation={4}
         PaperProps={{
           sx: {
             top: headerHeight,
@@ -143,11 +146,13 @@ export default function AsideMenu({ open, onClose }) {
             maxHeight: `calc(100vh - ${headerHeight})`,
             overflowY: 'auto',
             borderRadius: '10px',
+            position: 'fixed',
           },
         }}
         variant="temporary"
         ModalProps={{
           keepMounted: true,
+          disablePortal: false,
         }}
       >
         {DrawerList}
