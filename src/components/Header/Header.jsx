@@ -29,7 +29,7 @@ export default function Header() {
         <img src={logo} alt="teste" className="logo" />
       </div>
 
-      {/* Barra de pesquisa */}
+      {/* Barra de pesquisa! */}
       <div className="search-bar">
         <SearchIcon style={{ color: "#666", marginLeft: "10px" }} />
         <input type="text" placeholder="Serviço, usuário ou categoria" className="search-input" />
