@@ -1,7 +1,7 @@
 /* Estilização da área de mensagens */
 .messages-container {
   scrollbar-width: thin;
-  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+  scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
 }
 
 .messages-container::-webkit-scrollbar {
@@ -13,7 +13,7 @@
 }
 
 .messages-container::-webkit-scrollbar-thumb {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(66, 165, 246, 0.15);
   border-radius: 3px;
 }
 
@@ -36,18 +36,23 @@
 /* Estilização do input de mensagem */
 .message-input {
   transition: all 0.3s ease;
+  border-radius: 0.5rem;
 }
 
 .message-input:focus {
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(66, 165, 246, 0.1);
 }
 
 /* Estilização do botão de enviar */
 .send-button {
   transition: all 0.2s ease;
+  background-color: #42a5f6 !important;
+  color: #fff !important;
+  border-radius: 50%;
 }
 
 .send-button:hover {
+  background-color: #1976d2 !important;
   transform: scale(1.05);
 }
 
@@ -72,4 +77,30 @@
   100% {
     transform: rotate(360deg);
   }
+}
+
+.mensagem-card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  margin-bottom: 0.5rem;
+  max-width: 70%;
+  word-break: break-word;
+  animation: fadeIn 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
+  color: #222;
+}
+
+.mensagem-usuario {
+  background-color: #42a5f6;
+  align-self: flex-end;
+}
+
+.mensagem-outro {
+  background-color: #fff;
+  color: #222;
+  align-self: flex-start;
+  border: 1px solid #e3e3e3;
 }

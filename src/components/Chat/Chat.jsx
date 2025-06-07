@@ -22,11 +22,14 @@ const Chat = ({
   const [newMessage, setNewMessage] = useState("");
   const [chatId, setChatId] = useState(initialChatId);
   const [loading, setLoading] = useState(true);
-  const messagesEndRef = useRef(null);
+  const messagesContainerRef = useRef(null);
   const { user } = useAuth();
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    const container = messagesContainerRef.current;
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
   };
 
   useEffect(() => {
@@ -131,19 +134,14 @@ const Chat = ({
         <Avatar src={otherUserAvatar} alt={otherUserName}>
           {otherUserName?.charAt(0)}
         </Avatar>
-        <Typography variant="h6">{otherUserName}</Typography>
+        <Typography variant="h6" color="primary">{otherUserName}</Typography>
       </Box>
 
       {/* Área de mensagens */}
       <Box
-        sx={{
-          flex: 1,
-          overflow: "auto",
-          p: 2,
-          display: "flex",
-          flexDirection: "column",
-          gap: 1,
-        }}
+        className="messages-container"
+        ref={messagesContainerRef}
+        sx={{ flex: 1, overflow: "auto", p: 2, display: "flex", flexDirection: "column", gap: 1 }}
       >
         {messages.map((message) => (
           <Box
@@ -154,57 +152,7 @@ const Chat = ({
                 message.senderId === user.uid ? "flex-end" : "flex-start",
             }}
           >
-            <Paper
-              elevation={1}
-              sx={{
-                p: 1.5,
-                maxWidth: "70%",
-                bgcolor:
-                  message.senderId === user.uid
-                    ? "#2196f3 !important"
-                    : "#f5f5f5",
-                color: message.senderId === user.uid ? "#ffffff" : "#000000",
-                borderRadius: 2,
-                position: "relative",
-                zIndex: 1,
-                boxShadow:
-                  message.senderId === user.uid
-                    ? "0 2px 4px rgba(33, 150, 243, 0.3)"
-                    : "0 2px 4px rgba(0, 0, 0, 0.1)",
-                "& > *": {
-                  position: "relative",
-                  zIndex: 2,
-                },
-                "&::after":
-                  message.senderId === user.uid
-                    ? {
-                        content: '""',
-                        position: "absolute",
-                        right: -8,
-                        top: "50%",
-                        transform: "translateY(-50%)",
-                        border: "8px solid transparent",
-                        borderLeft: "8px solid #2196f3",
-                        zIndex: 0,
-                      }
-                    : {},
-                "&::before":
-                  message.senderId !== user.uid
-                    ? {
-                        content: '""',
-                        position: "absolute",
-                        left: -8,
-                        top: "50%",
-                        transform: "translateY(-50%)",
-                        border: "8px solid transparent",
-                        borderRight: "8px solid #f5f5f5",
-                        zIndex: 0,
-                      }
-                    : {},
-                background:
-                  message.senderId === user.uid ? "#2196f3" : "#f5f5f5",
-              }}
-            >
+            <div className={`mensagem-card${message.senderId === user.uid ? " mensagem-usuario" : " mensagem-outro"}`}>
               <Typography
                 variant="body1"
                 sx={{
@@ -214,8 +162,6 @@ const Chat = ({
                   fontSize: "0.95rem",
                   lineHeight: 1.5,
                   letterSpacing: "0.00938em",
-                  position: "relative",
-                  zIndex: 2,
                 }}
               >
                 {message.text}
@@ -227,21 +173,14 @@ const Chat = ({
                   textAlign: "right",
                   mt: 0.5,
                   fontSize: "0.75rem",
-                  opacity: message.senderId === user.uid ? 0.9 : 0.7,
-                  color:
-                    message.senderId === user.uid
-                      ? "#ffffff"
-                      : "rgba(0, 0, 0, 0.6)",
-                  position: "relative",
-                  zIndex: 2,
+                  opacity: 0.7,
                 }}
               >
                 {formatTimestamp(message.timestamp)}
               </Typography>
-            </Paper>
+            </div>
           </Box>
         ))}
-        <div ref={messagesEndRef} />
       </Box>
 
       {/* Área de input */}
@@ -263,16 +202,13 @@ const Chat = ({
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
           size="small"
+          className="message-input"
         />
         <IconButton
           type="submit"
           color="primary"
           disabled={!newMessage.trim()}
-          sx={{
-            bgcolor: "primary.main",
-            color: "white",
-            "&:hover": { bgcolor: "primary.dark" },
-          }}
+          className="send-button"
         >
           <SendIcon />
         </IconButton>

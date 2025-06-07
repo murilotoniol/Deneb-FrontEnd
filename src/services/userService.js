@@ -78,4 +78,16 @@ export const userService = {
       throw error;
     }
   },
+
+  // Deletar usuário do Firestore
+  async deleteUserFirestore(userId) {
+    try {
+      const db = getFirestore();
+      await (await import("firebase/firestore")).deleteDoc(doc(db, "users", userId));
+      return { success: true };
+    } catch (error) {
+      console.error("Erro ao deletar usuário do Firestore:", error);
+      return { success: false, error: error.message };
+    }
+  },
 };

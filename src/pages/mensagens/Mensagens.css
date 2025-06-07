@@ -17,13 +17,16 @@
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
+  padding-top: 10vh;
+  padding-bottom: 80px;
 }
 
 .mensagens-titulo {
   font-size: 2rem;
-  color: #0a2a37;
+  color: #42a5f6;
   margin-bottom: 2rem;
   text-align: center;
+  font-weight: 700;
 }
 
 .mensagens-lista {
@@ -34,10 +37,16 @@
 
 /* aqui */
 .mensagem-card {
-  background-color: white;
+  background-color: #fff;
   border-radius: 0.5rem;
   padding: 1.5rem;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  margin-bottom: 0.5rem;
+  max-width: 70%;
+  word-break: break-word;
+  animation: fadeIn 0.3s ease-out;
+  display: flex;
+  flex-direction: column;
 }
 
 .mensagem-header {
@@ -61,4 +70,23 @@
 .mensagem-conteudo {
   color: #333;
   line-height: 1.5;
+}
+
+.mensagens-lista-col {
+  width: 30% !important;
+  min-width: 220px;
+  max-width: 300px;
+}
+.mensagens-chat-col {
+  width: 60% !important;
+  min-width: 320px;
+  max-width: 600px;
+}
+@media (max-width: 900px) {
+  .mensagens-lista-col,
+  .mensagens-chat-col {
+    width: 100% !important;
+    min-width: unset;
+    max-width: unset;
+  }
 }

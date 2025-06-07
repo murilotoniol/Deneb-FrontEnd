@@ -1,7 +1,7 @@
 .register-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 135vh;
   background-color: #f7f8fa;
 }
 

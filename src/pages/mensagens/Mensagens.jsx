@@ -13,6 +13,9 @@ import Chat from "../../components/Chat/Chat";
 import { useAuth } from "../../hooks/useAuth";
 import { usePresence } from "../../hooks/usePresence";
 import { chatService } from "../../services/chatService";
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import "./Mensagens.css";
 
 const Mensagens = () => {
   const [selectedChat, setSelectedChat] = useState(null);
@@ -97,74 +100,76 @@ const Mensagens = () => {
   };
 
   return (
-    <Box
-      sx={{
-        height: "calc(100vh - 64px)",
-        p: 2,
-        bgcolor: "#f5f5f5",
-      }}
-    >
-      <Grid container spacing={2} sx={{ height: "100%" }}>
-        {/* Lista de Chats */}
-        <Grid
-          item
-          xs={12}
-          md={4}
-          sx={{
-            height: "100%",
-            display: isMobile && selectedChat ? "none" : "block",
-          }}
-        >
-          <ChatList
-            onChatSelect={handleChatSelect}
-            selectedChatId={selectedChat?.chatId}
-          />
-        </Grid>
-
-        {/* Área do Chat */}
-        <Grid
-          item
-          xs={12}
-          md={8}
-          sx={{
-            height: "100%",
-            display: isMobile && !selectedChat ? "none" : "block",
-          }}
-        >
-          {selectedChat ? (
-            <Chat
-              otherUserId={selectedChat.userId}
-              otherUserName={selectedChat.name}
-              otherUserAvatar={selectedChat.avatar}
-              chatId={selectedChat.chatId}
-            />
-          ) : (
-            <Box
+    <>
+      <Header />
+      <div className="mensagens-container">
+        <div className="mensagens-content">
+          <Grid container spacing={2} sx={{ height: "100%" }}>
+            {/* Lista de Chats */}
+            <Grid
+              item
+              xs={12}
+              md={4}
+              className="mensagens-lista-col"
               sx={{
                 height: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                bgcolor: "white",
-                borderRadius: "12px",
-                p: 3,
-                textAlign: "center",
-                flexDirection: "column",
-                gap: 2,
+                display: isMobile && selectedChat ? "none" : "block",
               }}
             >
-              <Typography variant="h6" color="text.secondary">
-                Selecione uma conversa para começar a chatear
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Ou volte para a página do serviço e clique em "Mensagem" para
-                iniciar uma nova conversa
-              </Typography>
-            </Box>
-          )}
-        </Grid>
-      </Grid>
-    </Box>
+              <ChatList
+                onChatSelect={handleChatSelect}
+                selectedChatId={selectedChat?.chatId}
+              />
+            </Grid>
+            {/* Área do Chat */}
+            <Grid
+              item
+              xs={12}
+              md={8}
+              className="mensagens-chat-col"
+              sx={{
+                height: "100%",
+                display: isMobile && !selectedChat ? "none" : "block",
+              }}
+            >
+              {selectedChat ? (
+                <Chat
+                  otherUserId={selectedChat.userId}
+                  otherUserName={selectedChat.name}
+                  otherUserAvatar={selectedChat.avatar}
+                  chatId={selectedChat.chatId}
+                />
+              ) : (
+                <Box
+                  className="mensagem-card"
+                  sx={{
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    bgcolor: "white",
+                    borderRadius: "12px",
+                    p: 3,
+                    textAlign: "center",
+                    flexDirection: "column",
+                    gap: 2,
+                  }}
+                >
+                  <Typography variant="h6" color="text.secondary">
+                    Selecione uma conversa para começar a chatear
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Ou volte para a página do serviço e clique em "Mensagem" para
+                    iniciar uma nova conversa
+                  </Typography>
+                </Box>
+              )}
+            </Grid>
+          </Grid>
+        </div>
+      </div>
+      <Footer />
+    </>
   );
 };
 

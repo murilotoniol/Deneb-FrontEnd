@@ -202,6 +202,7 @@ const ChatList = ({ onChatSelect, selectedChatId }) => {
                           textOverflow: "ellipsis",
                           whiteSpace: "nowrap",
                           maxWidth: "70%",
+                          color: '#222',
                         }}
                       >
                         {chat.lastMessage || "Nenhuma mensagem"}
@@ -209,17 +210,13 @@ const ChatList = ({ onChatSelect, selectedChatId }) => {
                       <Typography
                         component="span"
                         variant="caption"
-                        sx={{ ml: 1 }}
+                        sx={{ ml: 1, color: '#888' }}
                       >
                         {formatLastMessageTime(chat.updatedAt)}
                       </Typography>
                     </Box>
                   }
-                  sx={{
-                    "& .MuiListItemText-secondary": {
-                      color: chat.id === selectedChatId ? "white" : "inherit",
-                    },
-                  }}
+                  sx={{}}
                 />
               </ListItem>
             );
