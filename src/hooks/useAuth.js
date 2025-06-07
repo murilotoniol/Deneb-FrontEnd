@@ -1,16 +1,45 @@
-import { useState } from "react";
-import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { auth } from "../services/firebase";
 import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 export const useAuth = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
+  const [initialized, setInitialized] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      setUser(user);
+
+      if (user) {
+        try {
+          const db = getFirestore();
+          const userDoc = await getDoc(doc(db, "users", user.uid));
+          if (userDoc.exists()) {
+            setUserData(userDoc.data());
+          }
+        } catch (error) {
+          console.error("Erro ao buscar dados do usuário:", error);
+        }
+      } else {
+        setUserData(null);
+      }
+
+      setLoading(false);
+      setInitialized(true);
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const registerWithEmail = async (userData) => {
     setLoading(true);
@@ -136,8 +165,12 @@ export const useAuth = () => {
   };
 
   return {
+    user,
+    userData,
     loading,
     error,
+    initialized,
+    isAuthenticated: !!user,
     registerWithEmail,
     loginWithEmail,
     resetPassword,

@@ -116,3 +116,51 @@
 .signup-link p a:hover {
   text-decoration: underline;
 }
+
+/* Estilos específicos que não são cobertos pelo Material-UI */
+.loading-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Customização do tema Material-UI */
+.MuiPaper-root {
+  background-color: #ffffff !important;
+}
+
+.MuiButton-contained {
+  background-color: #42a5f6 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.MuiButton-contained:hover {
+  background-color: #1976d2 !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+.MuiTextField-root {
+  margin-bottom: 1rem !important;
+}
+
+.MuiCheckbox-root {
+  color: #42a5f6 !important;
+}
+
+.MuiLink-root {
+  text-decoration: none !important;
+  color: #42a5f6 !important;
+  transition: color 0.3s ease !important;
+}
+
+.MuiLink-root:hover {
+  color: #1976d2 !important;
+  text-decoration: underline !important;
+}

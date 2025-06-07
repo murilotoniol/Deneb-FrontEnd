@@ -2,11 +2,17 @@
 
 import { useState } from "react";
 import {
-  getFirestore,
   collection,
   addDoc,
-  serverTimestamp,
+  query,
+  where,
+  getDocs,
+  doc,
+  getDoc,
+  updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
+import { db } from "../services/firebase";
 // import { validateService } from "../utils/validateService"; // Removido se a validação for movida para o componente
 
 export const useService = () => {
