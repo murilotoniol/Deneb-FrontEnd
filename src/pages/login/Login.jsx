@@ -61,6 +61,9 @@ export default function Login() {
         case "auth/invalid-email":
           errorMessage = "Email inválido.";
           break;
+        case "auth/invalid-credential":
+          errorMessage = "Email ou senha inválidos.";
+          break;
         default:
           errorMessage = error.message;
       }
@@ -91,6 +94,8 @@ export default function Login() {
   }
 
   return (
+    <div>
+      <Header />
     <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
       <Container
         component="main"
@@ -220,7 +225,9 @@ export default function Login() {
             </Box>
           </Box>
         </Paper>
-      </Container>
-    </Box>
+        </Container>
+      </Box>
+      <Footer />
+    </div>
   );
 }

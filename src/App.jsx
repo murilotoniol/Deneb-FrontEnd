@@ -15,6 +15,10 @@ import DetalhesServico from "./pages/DetalheServico/DetalheServico";
 import { AuthProvider } from "./services/AuthContext";
 import PrivateRoute from "./components/PrivateRoute";
 import { MenuProvider } from "./components/MenuProvider/MenuProvider";
+import Perfil from "./pages/perfil/Perfil";
+import Categorias from "./pages/categorias/Categorias";
+import ServicosContratados from "./pages/servicosContratados/ServicosContratados";
+import MeusServicos from "./pages/meusServicos/MeusServicos";
 
 function App() {
   return (
@@ -50,8 +54,12 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path="/perfil" element={<PrivateRoute><Perfil /></PrivateRoute>} />
+          <Route path="/categorias" element={<Categorias />} />
           <Route path="/redefinir-senha" element={<RedefinirSenha />} />
           <Route path="/recuperar-senha" element={<RecuperarSenha />} />
+          <Route path="/meus-servicos" element={<PrivateRoute><MeusServicos /></PrivateRoute>} />
+          <Route path="/servicos-contratados" element={<PrivateRoute><ServicosContratados /></PrivateRoute>} />
         </Routes>
       </MenuProvider>
     </AuthProvider>

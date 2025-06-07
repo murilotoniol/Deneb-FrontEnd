@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 
 // Criar o contexto
@@ -87,12 +87,20 @@ export function AuthProvider({ children }) {
     checkToken();
   }, [user]);
 
+  const logout = async () => {
+    const auth = getAuth();
+    await signOut(auth);
+    setUser(null);
+    setUserData(null);
+  };
+
   const value = {
     user,
     userData,
     loading,
     error,
     isAuthenticated: !!user,
+    logout,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

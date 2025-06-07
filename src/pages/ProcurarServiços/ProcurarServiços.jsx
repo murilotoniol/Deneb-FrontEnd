@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { MapPin, PawPrint, DollarSign } from "lucide-react";
 import { motion } from "framer-motion";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./ProcurarServiços.css";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
@@ -10,6 +10,22 @@ import { useGetServices } from "../../hooks/useGetServices";
 export default function FindService() {
   const { services, loading, error } = useGetServices();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Pega o termo de busca da query string
+  const params = new URLSearchParams(location.search);
+  const busca = params.get("busca") || "";
+
+  // Filtra os serviços por nome ou categoria
+  const filteredServices = useMemo(() => {
+    if (!busca.trim()) return services;
+    const termo = busca.trim().toLowerCase();
+    return services.filter(
+      (service) =>
+        service.title.toLowerCase().includes(termo) ||
+        service.type.toLowerCase().includes(termo)
+    );
+  }, [services, busca]);
 
   if (loading) {
     return (
@@ -60,12 +76,12 @@ export default function FindService() {
         </motion.h1>
 
         <div className="services-grid">
-          {services.length === 0 ? (
+          {filteredServices.length === 0 ? (
             <div className="no-services-message">
-              <p>Nenhum serviço disponível no momento.</p>
+              <p>Nenhum serviço encontrado para sua busca.</p>
             </div>
           ) : (
-            services.map((service) => (
+            filteredServices.map((service) => (
               <motion.div
                 key={service.id}
                 className="service-card"

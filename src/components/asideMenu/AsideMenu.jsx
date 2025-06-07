@@ -48,6 +48,7 @@ export default function AsideMenu({ open, onClose }) {
   const handleLogout = () => {
     logout();
     onClose();
+    navigate("/login");
   };
 
   const goToEntrar = () => {
