@@ -18,6 +18,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { useAuth } from "../../services/AuthContext";
+import { chatService } from "../../services/chatService";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import "../DetalheServico/DetalheServico.css";
@@ -82,13 +83,59 @@ export default function DetalhesServico() {
     fetchServiceDetails();
   }, [serviceId]);
 
-  const handleMessage = () => {
+  const handleMessage = async () => {
     if (!user) {
       alert("Você precisa estar logado para enviar mensagens");
-      navigate("/login");
+      navigate("/login", { state: { from: location.pathname } });
       return;
     }
-    navigate(`/mensagens?provider=${service.user_id}`);
+
+    try {
+      if (user.uid === service.user_id) {
+        alert("Você não pode iniciar um chat com você mesmo.");
+        return;
+      }
+
+      const chatId = await chatService.createOrGetChat(
+        user.uid,
+        service.user_id,
+        {
+          serviceId: service.id,
+          serviceTitle: service.title,
+          serviceName: service.title,
+          serviceType: service.type,
+          servicePrice: service.price,
+          providerName: provider
+            ? `${provider.first_name} ${provider.last_name}`
+            : "Prestador",
+          providerAvatar: provider?.avatar_url,
+          createdAt: new Date().toISOString(),
+        }
+      );
+
+      navigate("/mensagens", {
+        state: {
+          chatInfo: {
+            chatId,
+            userId: service.user_id,
+            name: provider
+              ? `${provider.first_name} ${provider.last_name}`
+              : "Prestador",
+            avatar: provider?.avatar_url,
+            serviceTitle: service.title,
+          },
+        },
+      });
+    } catch (error) {
+      if (error.code === "permission-denied") {
+        alert("Você precisa fazer login novamente para iniciar o chat.");
+        navigate("/login", { state: { from: location.pathname } });
+      } else {
+        alert(
+          "Houve um erro ao iniciar a conversa. Por favor, tente novamente."
+        );
+      }
+    }
   };
 
   if (loading) {
