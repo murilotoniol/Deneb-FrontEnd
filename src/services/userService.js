@@ -1,12 +1,10 @@
 import { db } from "../services/firebase";
 import { doc, getDoc, setDoc, updateDoc } from "firebase/firestore";
-import { getFirestore } from "firebase/firestore";
 
 export const userService = {
   // Buscar informações de um usuário
   async getUserInfo(userId) {
     try {
-      const db = getFirestore();
       const userDoc = await getDoc(doc(db, "users", userId));
 
       if (!userDoc.exists()) {
@@ -82,7 +80,6 @@ export const userService = {
   // Deletar usuário do Firestore
   async deleteUserFirestore(userId) {
     try {
-      const db = getFirestore();
       await (await import("firebase/firestore")).deleteDoc(doc(db, "users", userId));
       return { success: true };
     } catch (error) {

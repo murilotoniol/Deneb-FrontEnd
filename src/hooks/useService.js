@@ -11,6 +11,7 @@ import {
   getDoc,
   updateDoc,
   deleteDoc,
+  serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../services/firebase";
 // import { validateService } from "../utils/validateService"; // Removido se a validação for movida para o componente
@@ -31,8 +32,6 @@ export const useService = () => {
     setError(null);
 
     try {
-      const db = getFirestore(); // Obtém a instância do Firestore
-
       // Adiciona um novo documento à coleção "services" (ou o nome que você preferir para serviços base)
       const docRef = await addDoc(collection(db, "services"), {
         name: serviceData.name, // Nome do serviço (ex: "Passeio com Cães")

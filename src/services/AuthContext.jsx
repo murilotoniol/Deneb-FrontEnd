@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { db } from "../services/firebase";
 
 // Criar o contexto
 const AuthContext = createContext();
@@ -14,7 +15,6 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     console.log("AuthProvider: Iniciando verificação de autenticação");
     const auth = getAuth();
-    const db = getFirestore();
 
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       console.log("AuthProvider: Estado de autenticação mudou", {

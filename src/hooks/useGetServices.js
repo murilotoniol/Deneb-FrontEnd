@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import {
-  getFirestore,
   collection,
   query,
   getDocs,
   doc,
   getDoc,
 } from "firebase/firestore";
+import { db } from "../services/firebase";
 
 export const useGetServices = () => {
   const [services, setServices] = useState([]);
@@ -16,8 +16,6 @@ export const useGetServices = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const db = getFirestore();
-
         // Buscar todas as ofertas de serviço
         const offersQuery = query(collection(db, "service-offer"));
         const offersSnapshot = await getDocs(offersQuery);

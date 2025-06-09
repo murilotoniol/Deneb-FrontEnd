@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
 import { auth } from "../services/firebase";
+import { db } from "../services/firebase";
 import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
@@ -22,7 +22,6 @@ export const useAuth = () => {
 
       if (user) {
         try {
-          const db = getFirestore();
           const userDoc = await getDoc(doc(db, "users", user.uid));
           if (userDoc.exists()) {
             setUserData(userDoc.data());
@@ -53,7 +52,6 @@ export const useAuth = () => {
       );
       const user = userCredential.user;
 
-      const db = getFirestore();
       await setDoc(doc(db, "users", user.uid), {
         first_name: userData.first_name,
         last_name: userData.last_name,

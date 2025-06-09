@@ -2,12 +2,11 @@
 
 import { useState } from "react";
 import {
-  getFirestore,
   collection,
   addDoc,
   serverTimestamp,
 } from "firebase/firestore";
-import { auth } from "../services/firebase"; // Importa a instância de autenticação do Firebase
+import { auth, db } from "../services/firebase"; // Importa a instância de autenticação e db do Firebase
 // import { validateServiceOffer } from "../utils/validateServiceOffer"; // Removido se a validação for movida para o componente
 
 export const useServiceOffer = () => {
@@ -27,7 +26,6 @@ export const useServiceOffer = () => {
     setError(null);
 
     try {
-      const db = getFirestore(); // Obtém a instância do Firestore
       const user = auth.currentUser; // Obtém o usuário atualmente autenticado
 
       // Verifica se há um usuário autenticado e se o userId passado corresponde.
