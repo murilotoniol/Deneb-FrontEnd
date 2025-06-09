@@ -33,7 +33,7 @@ export default function Footer() {
                 <h3 className="title-widget">ACESSO RÁPIDO</h3>
                 <div className="text-widget">
                   <ul>
-                    <li><a href="/anunciar">Anunciar</a></li>
+                    <li><a href="/ofertaservico">Anunciar</a></li>
                     <li><a href="/perguntas-frequentes">Perguntas frequentes</a></li>
                     <li><a href="/categorias">Categorias</a></li>
                     <li><a href="/central-de-ajuda">Central de Ajuda</a></li>
