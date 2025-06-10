@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { auth } from "../services/firebase";
-import { db } from "../services/firebase";
+import { auth, db } from "../services/firebase";
 import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
@@ -8,6 +7,7 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
+import { doc, getDoc, setDoc } from "firebase/firestore";
 
 export const useAuth = () => {
   const [loading, setLoading] = useState(true);
