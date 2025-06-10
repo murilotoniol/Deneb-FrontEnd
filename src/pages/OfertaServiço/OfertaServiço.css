@@ -17,7 +17,7 @@
   background-color: #ffffff;
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border: 1px solid #6AB7D5;
+  border: 1px solid #6ab7d5;
   padding: 2rem;
   margin-bottom: 2rem;
 }
@@ -26,7 +26,7 @@
   text-align: center;
   font-size: 2.5rem;
   font-weight: bold;
-  color: #0A2A37;
+  color: #0a2a37;
   margin-bottom: 2rem;
 }
 
@@ -45,7 +45,7 @@
   display: flex;
   flex-direction: column;
   font-weight: 500;
-  color: #0A2A37;
+  color: #0a2a37;
   gap: 0.25rem;
 }
 
@@ -53,12 +53,12 @@
 .register-form textarea,
 .register-form select {
   padding: 0.75rem;
-  border: 1px solid #6AB7D5;
+  border: 1px solid #6ab7d5;
   border-radius: 0.5rem;
   font-size: 1rem;
   font-family: inherit;
   background-color: #f0faff;
-  color: #0A2A37;
+  color: #0a2a37;
   transition: border-color 0.2s ease;
 }
 
@@ -66,7 +66,7 @@
 .register-form textarea:focus,
 .register-form select:focus {
   outline: none;
-  border-color: #42A5F6;
+  border-color: #42a5f6;
   box-shadow: 0 0 0 2px rgba(66, 165, 246, 0.25);
 }
 
@@ -76,7 +76,7 @@
 }
 
 .btn-primary {
-  background-color: #42A5F6;
+  background-color: #42a5f6;
   color: white;
   padding: 0.75rem 1.5rem;
   border: none;
@@ -91,7 +91,7 @@
 }
 
 .btn-primary:hover {
-  background-color: #5591A9;
+  background-color: #5591a9;
 }
 
 .icon {

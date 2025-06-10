@@ -1,7 +1,7 @@
-import React from "react";
-import { Navigate, useLocation } from "react-router-dom";
-import { useAuth } from "../services/AuthContext";
-import { CircularProgress, Box } from "@mui/material";
+import React from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../services/AuthContext';
+import { CircularProgress, Box } from '@mui/material';
 
 const PrivateRoute = ({ children }) => {
   const { isAuthenticated, loading } = useAuth();
@@ -11,10 +11,10 @@ const PrivateRoute = ({ children }) => {
     return (
       <Box
         sx={{
-          height: "100vh",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          height: '100vh',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
         }}
       >
         <CircularProgress />
@@ -22,7 +22,7 @@ const PrivateRoute = ({ children }) => {
     );
   }
 
-  if (location.pathname === "/login") {
+  if (location.pathname === '/login') {
     if (isAuthenticated) {
       return <Navigate to="/" replace />;
     }

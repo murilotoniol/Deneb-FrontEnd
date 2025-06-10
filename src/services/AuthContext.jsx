@@ -1,7 +1,7 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import { getAuth, onAuthStateChanged, signOut } from "firebase/auth";
-import { getFirestore, doc, getDoc } from "firebase/firestore";
-import { db } from "../services/firebase";
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
+import { db } from '../services/firebase';
 
 // Criar o contexto
 const AuthContext = createContext();
@@ -13,55 +13,55 @@ export function AuthProvider({ children }) {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log("AuthProvider: Iniciando verificação de autenticação");
+    console.log('AuthProvider: Iniciando verificação de autenticação');
     const auth = getAuth();
 
-    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      console.log("AuthProvider: Estado de autenticação mudou", {
+    const unsubscribe = onAuthStateChanged(auth, async currentUser => {
+      console.log('AuthProvider: Estado de autenticação mudou', {
         currentUser: !!currentUser,
       });
 
       try {
         if (currentUser) {
           console.log(
-            "AuthProvider: Usuário autenticado, buscando dados adicionais"
+            'AuthProvider: Usuário autenticado, buscando dados adicionais'
           );
           setUser(currentUser);
 
-          const userDocRef = doc(db, "users", currentUser.uid);
+          const userDocRef = doc(db, 'users', currentUser.uid);
           const userDoc = await getDoc(userDocRef);
 
           if (userDoc.exists()) {
             console.log(
-              "AuthProvider: Dados do usuário encontrados no Firestore"
+              'AuthProvider: Dados do usuário encontrados no Firestore'
             );
             setUserData({
               ...userDoc.data(),
               id: currentUser.uid,
             });
           } else {
-            console.log("AuthProvider: Dados básicos do usuário definidos");
+            console.log('AuthProvider: Dados básicos do usuário definidos');
             setUserData({
               id: currentUser.uid,
               email: currentUser.email,
             });
           }
         } else {
-          console.log("AuthProvider: Usuário não autenticado");
+          console.log('AuthProvider: Usuário não autenticado');
           setUser(null);
           setUserData(null);
         }
       } catch (error) {
-        console.error("AuthProvider: Erro ao processar autenticação", error);
+        console.error('AuthProvider: Erro ao processar autenticação', error);
         setError(error.message);
       } finally {
-        console.log("AuthProvider: Finalizando verificação de autenticação");
+        console.log('AuthProvider: Finalizando verificação de autenticação');
         setLoading(false);
       }
     });
 
     return () => {
-      console.log("AuthProvider: Limpando listener de autenticação");
+      console.log('AuthProvider: Limpando listener de autenticação');
       unsubscribe();
     };
   }, []);
@@ -73,13 +73,13 @@ export function AuthProvider({ children }) {
 
       try {
         const token = await user.getIdToken();
-        console.log("AuthProvider: Token do usuário válido");
+        console.log('AuthProvider: Token do usuário válido');
       } catch (error) {
-        console.error("AuthProvider: Erro ao verificar token", error);
+        console.error('AuthProvider: Erro ao verificar token', error);
         // Se houver erro no token, força um refresh da autenticação
         const auth = getAuth();
         auth.signOut().then(() => {
-          window.location.href = "/login";
+          window.location.href = '/login';
         });
       }
     };
@@ -109,7 +109,7 @@ export function AuthProvider({ children }) {
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error("useAuth must be used within an AuthProvider");
+    throw new Error('useAuth must be used within an AuthProvider');
   }
   return context;
 }

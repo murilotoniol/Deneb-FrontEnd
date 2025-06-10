@@ -1,34 +1,45 @@
-import React from "react";
-import { PawPrint, Search, Heart } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
-import "./Home.css";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
-import { useAuth } from "../../services/AuthContext";
+import React from 'react';
+import { PawPrint, Search, Heart } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import './Home.css';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import { useAuth } from '../../services/AuthContext';
 
 export default function Home() {
   const navigate = useNavigate();
   const { user, userData, loading } = useAuth();
 
   const goToOfertarServico = () => {
-    navigate("/ofertaservico");
+    navigate('/ofertaservico');
   };
 
   const goToProcurarServico = () => {
-    navigate("/procurarservicos");
+    navigate('/procurarservicos');
   };
 
   if (loading) {
     return (
-      <main className="home-main" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <main
+        className="home-main"
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
         <p>Carregando...</p>
       </main>
     );
   }
 
   return (
-    <main className="home-main" style={{ minHeight: '130vh', display: 'flex', flexDirection: 'column' }}>
+    <main
+      className="home-main"
+      style={{ minHeight: '130vh', display: 'flex', flexDirection: 'column' }}
+    >
       <Header />
       <div style={{ flex: 1, width: '100%' }}>
         <section className="hero-section">
@@ -83,8 +94,8 @@ export default function Home() {
             <PawPrint className="card-icon" />
             <h3>Amor pelos Animais</h3>
             <p>
-              Nossa missão é garantir que cada pet receba cuidado, atenção e muito
-              carinho.
+              Nossa missão é garantir que cada pet receba cuidado, atenção e
+              muito carinho.
             </p>
           </div>
         </section>

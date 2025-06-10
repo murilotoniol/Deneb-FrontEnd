@@ -1,34 +1,34 @@
-import React from "react";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
-import { useNavigate } from "react-router-dom";
-import "./categorias.css";
+import React from 'react';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import { useNavigate } from 'react-router-dom';
+import './categorias.css';
 
 const categorias = [
   {
-    nome: "Cachorro",
-    valor: "cachorro",
-    icone: "🐶",
-    descricao: "Serviços para cães: passeios, banho, adestramento e mais."
+    nome: 'Cachorro',
+    valor: 'cachorro',
+    icone: '🐶',
+    descricao: 'Serviços para cães: passeios, banho, adestramento e mais.',
   },
   {
-    nome: "Gato",
-    valor: "gato",
-    icone: "🐱",
-    descricao: "Serviços para gatos: cuidados, hospedagem, veterinário e mais."
+    nome: 'Gato',
+    valor: 'gato',
+    icone: '🐱',
+    descricao: 'Serviços para gatos: cuidados, hospedagem, veterinário e mais.',
   },
   {
-    nome: "Outros",
-    valor: "outros",
-    icone: "🐾",
-    descricao: "Serviços para outros pets: roedores, aves, exóticos e mais."
-  }
+    nome: 'Outros',
+    valor: 'outros',
+    icone: '🐾',
+    descricao: 'Serviços para outros pets: roedores, aves, exóticos e mais.',
+  },
 ];
 
 export default function Categorias() {
   const navigate = useNavigate();
 
-  const handleCategoria = (cat) => {
+  const handleCategoria = cat => {
     navigate(`/procurarservicos?busca=${encodeURIComponent(cat)}`);
   };
 
@@ -38,7 +38,7 @@ export default function Categorias() {
       <div className="categorias-content">
         <h1 className="categorias-titulo">Categorias</h1>
         <div className="categorias-lista">
-          {categorias.map((cat) => (
+          {categorias.map(cat => (
             <div
               key={cat.valor}
               className="categoria-card"
@@ -54,4 +54,4 @@ export default function Categorias() {
       <Footer />
     </div>
   );
-} 
+}

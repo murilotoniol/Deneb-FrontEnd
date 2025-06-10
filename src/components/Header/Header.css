@@ -17,7 +17,7 @@
   top: 0;
   left: 0;
   font-size: 14px;
-  transition: all .2s;
+  transition: all 0.2s;
   -webkit-backdrop-filter: blur(20px);
   backdrop-filter: blur(20px);
   transform: translateZ(0);
@@ -44,7 +44,7 @@
 }
 
 .button-anunciar {
-  background-color: #42A5F6;
+  background-color: #42a5f6;
   color: white;
   padding: 8px 24px;
   border: none;

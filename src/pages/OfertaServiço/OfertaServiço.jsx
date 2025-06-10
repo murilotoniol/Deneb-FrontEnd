@@ -1,16 +1,16 @@
 // src/pages/OfertaServiço.jsx
 
-import React, { useState, useEffect } from "react";
-import { PawPrint } from "lucide-react";
-import { motion } from "framer-motion";
-import "./OfertaServiço.css";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
-import { useService } from "../../hooks/useService"; // Importe o novo hook useService
-import { useServiceOffer } from "../../hooks/useServiceOffer";
-import { useAuth } from "../../services/AuthContext";
-import { useNavigate } from "react-router-dom"; // Para redirecionar
-import { validateServiceOffer } from "../../utils/validateServiceOffer"; // Importe a validação aqui
+import React, { useState, useEffect } from 'react';
+import { PawPrint } from 'lucide-react';
+import { motion } from 'framer-motion';
+import './OfertaServiço.css';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import { useService } from '../../hooks/useService'; // Importe o novo hook useService
+import { useServiceOffer } from '../../hooks/useServiceOffer';
+import { useAuth } from '../../services/AuthContext';
+import { useNavigate } from 'react-router-dom'; // Para redirecionar
+import { validateServiceOffer } from '../../utils/validateServiceOffer'; // Importe a validação aqui
 
 export default function OfertaServiço() {
   const { user, loading: authLoading } = useAuth();
@@ -30,10 +30,10 @@ export default function OfertaServiço() {
 
   // Estado do formulário
   const [form, setForm] = useState({
-    name: "", // Nome do serviço base
-    animalType: "", // Tipo de animal do serviço base
-    description: "", // Descrição do serviço base
-    price: "", // Preço da oferta específica
+    name: '', // Nome do serviço base
+    animalType: '', // Tipo de animal do serviço base
+    description: '', // Descrição do serviço base
+    price: '', // Preço da oferta específica
   });
 
   // Estado para erros de validação no cliente
@@ -42,15 +42,15 @@ export default function OfertaServiço() {
   // Efeito para redirecionar se o usuário não estiver autenticado
   useEffect(() => {
     if (!authLoading && !user) {
-      navigate("/login");
+      navigate('/login');
     }
   }, [user, authLoading, navigate]);
 
-  const handleChange = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const handleChange = e => {
+    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
     // Limpa o erro de validação para o campo atual ao digitar
     if (validationErrors[e.target.name]) {
-      setValidationErrors((prev) => {
+      setValidationErrors(prev => {
         const newErrors = { ...prev };
         delete newErrors[e.target.name];
         return newErrors;
@@ -58,7 +58,7 @@ export default function OfertaServiço() {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     // 1. Validação no cliente
@@ -70,8 +70,8 @@ export default function OfertaServiço() {
 
     // 2. Verificação de autenticação (redundante com useEffect, mas bom para segurança imediata)
     if (!user) {
-      alert("Você precisa estar logado para oferecer um serviço.");
-      navigate("/login");
+      alert('Você precisa estar logado para oferecer um serviço.');
+      navigate('/login');
       return;
     }
 
@@ -83,7 +83,7 @@ export default function OfertaServiço() {
     });
 
     if (!serviceResult.success) {
-      alert(serviceResult.error || "Erro ao cadastrar o serviço base.");
+      alert(serviceResult.error || 'Erro ao cadastrar o serviço base.');
       return;
     }
 
@@ -99,12 +99,12 @@ export default function OfertaServiço() {
     );
 
     if (offerResult.success) {
-      alert("Oferta de serviço cadastrada com sucesso!");
+      alert('Oferta de serviço cadastrada com sucesso!');
       // Limpa o formulário após o sucesso
-      setForm({ name: "", animalType: "", description: "", price: "" });
+      setForm({ name: '', animalType: '', description: '', price: '' });
       setValidationErrors({}); // Limpa os erros de validação
     } else {
-      alert(offerResult.error || "Erro ao cadastrar a oferta de serviço.");
+      alert(offerResult.error || 'Erro ao cadastrar a oferta de serviço.');
     }
   };
 
@@ -217,7 +217,7 @@ export default function OfertaServiço() {
               disabled={overallLoading}
             >
               <PawPrint className="icon" />
-              {overallLoading ? "Salvando..." : "Cadastrar Oferta"}
+              {overallLoading ? 'Salvando...' : 'Cadastrar Oferta'}
             </button>
             {overallError && <p className="form-error">{overallError}</p>}
           </form>

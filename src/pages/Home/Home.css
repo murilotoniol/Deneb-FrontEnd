@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #000;
 }
 
@@ -28,11 +28,11 @@ body {
 .home-title {
   font-size: 3rem;
   font-weight: bold;
-  color: #0A2A37;
+  color: #0a2a37;
 }
 
 .home-subtitle {
-  color: #5591A9;
+  color: #5591a9;
   font-size: 1.125rem;
   margin-top: 1rem;
 }
@@ -45,7 +45,7 @@ body {
 }
 
 .btn-primary {
-  background-color: #42A5F6;
+  background-color: #42a5f6;
   color: white;
   padding: 0.75rem 1.5rem;
   border: none;
@@ -59,13 +59,13 @@ body {
 }
 
 .btn-primary:hover {
-  background-color: #5591A9;
+  background-color: #5591a9;
 }
 
 .btn-outline {
-  border: 2px solid #42A5F6;
+  border: 2px solid #42a5f6;
   background-color: transparent;
-  color: #42A5F6;
+  color: #42a5f6;
   padding: 0.75rem 1.5rem;
   border-radius: 9999px;
   font-weight: 600;
@@ -77,7 +77,7 @@ body {
 }
 
 .btn-outline:hover {
-  background-color: #6AB7D5;
+  background-color: #6ab7d5;
   color: white;
 }
 
@@ -100,13 +100,13 @@ body {
   background-color: #ffffff;
   padding: 1.5rem;
   text-align: center;
-  border: 1px solid #6AB7D5;
+  border: 1px solid #6ab7d5;
 }
 
 .card-icon {
   width: 2.5rem;
   height: 2.5rem;
-  color: #42A5F6;
+  color: #42a5f6;
   margin: 0 auto;
 }
 
@@ -114,10 +114,10 @@ body {
   margin-top: 1rem;
   font-size: 1.25rem;
   font-weight: 600;
-  color: #0A2A37;
+  color: #0a2a37;
 }
 
 .card p {
   margin-top: 0.5rem;
-  color: #5591A9;
+  color: #5591a9;
 }

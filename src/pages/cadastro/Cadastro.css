@@ -79,8 +79,8 @@ button:disabled {
   align-items: center;
   min-height: 100vh;
   padding: 20px;
-  background-color: #f7f8fa;  
-  font-family: "Roboto", sans-serif;
+  background-color: #f7f8fa;
+  font-family: 'Roboto', sans-serif;
   color: #0a2a37;
 }
 
@@ -138,7 +138,7 @@ button:disabled {
   box-shadow: 0 0 0 3px rgba(66, 165, 246, 0.1);
 }
 
-.form-group input[aria-invalid="true"] {
+.form-group input[aria-invalid='true'] {
   border-color: #ef4444;
 }
 

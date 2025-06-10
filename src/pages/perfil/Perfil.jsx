@@ -1,11 +1,11 @@
-import React, { useEffect, useState, useRef } from "react";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
-import { useAuth } from "../../services/AuthContext";
-import { userService } from "../../services/userService";
-import "./perfil.css";
-import pawProfile from "../../assets/paw-profile.png";
-import { getAuth, deleteUser } from "firebase/auth";
+import React, { useEffect, useState, useRef } from 'react';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import { useAuth } from '../../services/AuthContext';
+import { userService } from '../../services/userService';
+import './perfil.css';
+import pawProfile from '../../assets/paw-profile.png';
+import { getAuth, deleteUser } from 'firebase/auth';
 
 export default function Perfil() {
   const { user, loading: authLoading } = useAuth();
@@ -13,15 +13,15 @@ export default function Perfil() {
   const [loading, setLoading] = useState(true);
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef();
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
-  const [deleteError, setDeleteError] = useState("");
+  const [deleteError, setDeleteError] = useState('');
   const [deleteSuccess, setDeleteSuccess] = useState(false);
 
   useEffect(() => {
     if (user) {
-      userService.getUserInfo(user.uid).then((info) => {
+      userService.getUserInfo(user.uid).then(info => {
         setUserInfo(info);
         setLoading(false);
       });
@@ -30,28 +30,30 @@ export default function Perfil() {
     }
   }, [user]);
 
-  const handleImageChange = async (e) => {
+  const handleImageChange = async e => {
     const file = e.target.files[0];
     if (!file) return;
     setUploading(true);
-    setError("");
+    setError('');
     try {
       const reader = new FileReader();
       reader.onloadend = async () => {
-        await userService.updateUserProfile(user.uid, { avatar_url: reader.result });
-        setUserInfo((prev) => ({ ...prev, avatar: reader.result }));
+        await userService.updateUserProfile(user.uid, {
+          avatar_url: reader.result,
+        });
+        setUserInfo(prev => ({ ...prev, avatar: reader.result }));
         setUploading(false);
       };
       reader.readAsDataURL(file);
     } catch (err) {
-      setError("Erro ao atualizar imagem de perfil.");
+      setError('Erro ao atualizar imagem de perfil.');
       setUploading(false);
     }
   };
 
   const handleDeleteAccount = async () => {
     setDeleteLoading(true);
-    setDeleteError("");
+    setDeleteError('');
     try {
       // 1. Deletar do Firestore
       const firestoreResult = await userService.deleteUserFirestore(user.uid);
@@ -61,10 +63,10 @@ export default function Perfil() {
       await deleteUser(auth.currentUser);
       setDeleteSuccess(true);
       setTimeout(() => {
-        window.location.href = "/";
+        window.location.href = '/';
       }, 2000);
     } catch (err) {
-      setDeleteError(err.message || "Erro ao excluir conta.");
+      setDeleteError(err.message || 'Erro ao excluir conta.');
     } finally {
       setDeleteLoading(false);
     }
@@ -118,12 +120,12 @@ export default function Perfil() {
               onClick={() => fileInputRef.current.click()}
               disabled={uploading}
             >
-              {uploading ? "Salvando..." : "Alterar imagem"}
+              {uploading ? 'Salvando...' : 'Alterar imagem'}
             </button>
             <input
               type="file"
               accept="image/*"
-              style={{ display: "none" }}
+              style={{ display: 'none' }}
               ref={fileInputRef}
               onChange={handleImageChange}
               disabled={uploading}
@@ -131,27 +133,63 @@ export default function Perfil() {
             {error && <p className="perfil-erro">{error}</p>}
           </div>
           <h2>{userInfo.name}</h2>
-          <p><b>Nome:</b> {userInfo.name}</p>
-          <p><b>Email:</b> {user.email}</p>
-          <div style={{ display: 'flex', gap: 16, margin: '16px 0 0 0', width: '100%', justifyContent: 'center' }}>
+          <p>
+            <b>Nome:</b> {userInfo.name}
+          </p>
+          <p>
+            <b>Email:</b> {user.email}
+          </p>
+          <div
+            style={{
+              display: 'flex',
+              gap: 16,
+              margin: '16px 0 0 0',
+              width: '100%',
+              justifyContent: 'center',
+            }}
+          >
             <button
               className="perfil-password-btn"
-              style={{ background: '#42a5f6', color: 'white', border: 'none', borderRadius: 8, padding: '0.5rem 1.2rem', fontWeight: 600, cursor: 'pointer' }}
+              style={{
+                background: '#42a5f6',
+                color: 'white',
+                border: 'none',
+                borderRadius: 8,
+                padding: '0.5rem 1.2rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}
               onClick={() => alert('Funcionalidade em desenvolvimento')}
             >
               Alterar senha
             </button>
             <button
               className="perfil-delete-btn"
-              style={{ background: '#dc3545', color: 'white', border: 'none', borderRadius: 8, padding: '0.7rem 1.5rem', fontWeight: 600, cursor: 'pointer' }}
+              style={{
+                background: '#dc3545',
+                color: 'white',
+                border: 'none',
+                borderRadius: 8,
+                padding: '0.7rem 1.5rem',
+                fontWeight: 600,
+                cursor: 'pointer',
+              }}
               onClick={() => setShowDeleteModal(true)}
               disabled={deleteLoading}
             >
               Excluir Conta
             </button>
           </div>
-          {userInfo.phone_number && <p><b>Telefone:</b> {userInfo.phone_number}</p>}
-          {userInfo.birth_date && <p><b>Data de nascimento:</b> {userInfo.birth_date}</p>}
+          {userInfo.phone_number && (
+            <p>
+              <b>Telefone:</b> {userInfo.phone_number}
+            </p>
+          )}
+          {userInfo.birth_date && (
+            <p>
+              <b>Data de nascimento:</b> {userInfo.birth_date}
+            </p>
+          )}
         </div>
       </div>
 
@@ -160,23 +198,44 @@ export default function Perfil() {
         <div className="perfil-modal-overlay">
           <div className="perfil-modal">
             <h2>Tem certeza que deseja excluir sua conta?</h2>
-            <p>Esta ação é <b>irreversível</b> e todos os seus dados serão apagados.</p>
+            <p>
+              Esta ação é <b>irreversível</b> e todos os seus dados serão
+              apagados.
+            </p>
             {deleteError && <p className="perfil-erro">{deleteError}</p>}
             {deleteSuccess ? (
-              <p style={{ color: '#198754', fontWeight: 600 }}>Conta excluída com sucesso!</p>
+              <p style={{ color: '#198754', fontWeight: 600 }}>
+                Conta excluída com sucesso!
+              </p>
             ) : (
               <div style={{ display: 'flex', gap: 12, marginTop: 16 }}>
                 <button
                   onClick={handleDeleteAccount}
                   disabled={deleteLoading}
-                  style={{ background: '#dc3545', color: 'white', border: 'none', borderRadius: 8, padding: '0.7rem 1.5rem', fontWeight: 600, cursor: 'pointer' }}
+                  style={{
+                    background: '#dc3545',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: 8,
+                    padding: '0.7rem 1.5rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                  }}
                 >
                   {deleteLoading ? 'Excluindo...' : 'Sim, excluir'}
                 </button>
                 <button
                   onClick={() => setShowDeleteModal(false)}
                   disabled={deleteLoading}
-                  style={{ background: '#6c757d', color: 'white', border: 'none', borderRadius: 8, padding: '0.7rem 1.5rem', fontWeight: 600, cursor: 'pointer' }}
+                  style={{
+                    background: '#6c757d',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: 8,
+                    padding: '0.7rem 1.5rem',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                  }}
                 >
                   Cancelar
                 </button>
@@ -188,4 +247,4 @@ export default function Perfil() {
       <Footer />
     </div>
   );
-} 
+}

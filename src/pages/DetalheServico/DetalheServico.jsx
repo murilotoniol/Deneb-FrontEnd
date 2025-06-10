@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   PawPrint,
   DollarSign,
   MessageCircle,
   ArrowLeft,
   HandshakeIcon,
-} from "lucide-react";
-import { motion } from "framer-motion";
+} from 'lucide-react';
+import { motion } from 'framer-motion';
 import {
   getFirestore,
   doc,
@@ -16,12 +16,12 @@ import {
   query,
   where,
   getDocs,
-} from "firebase/firestore";
-import { useAuth } from "../../services/AuthContext";
-import { chatService } from "../../services/chatService";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
-import "../DetalheServico/DetalheServico.css";
+} from 'firebase/firestore';
+import { useAuth } from '../../services/AuthContext';
+import { chatService } from '../../services/chatService';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import '../DetalheServico/DetalheServico.css';
 
 export default function DetalhesServico() {
   const { serviceId } = useParams();
@@ -38,25 +38,25 @@ export default function DetalhesServico() {
         const db = getFirestore();
 
         // Buscar a oferta de serviço
-        const offerDoc = await getDoc(doc(db, "service-offer", serviceId));
+        const offerDoc = await getDoc(doc(db, 'service-offer', serviceId));
         if (!offerDoc.exists()) {
-          throw new Error("Serviço não encontrado");
+          throw new Error('Serviço não encontrado');
         }
 
         const offerData = offerDoc.data();
 
         // Buscar o serviço base
         const serviceDoc = await getDoc(
-          doc(db, "services", offerData.service_id)
+          doc(db, 'services', offerData.service_id)
         );
         if (!serviceDoc.exists()) {
-          throw new Error("Dados do serviço base não encontrados");
+          throw new Error('Dados do serviço base não encontrados');
         }
 
         const serviceData = serviceDoc.data();
 
         // Buscar dados do prestador do serviço
-        const providerDoc = await getDoc(doc(db, "users", offerData.user_id));
+        const providerDoc = await getDoc(doc(db, 'users', offerData.user_id));
         if (providerDoc.exists()) {
           setProvider(providerDoc.data());
         }
@@ -74,7 +74,7 @@ export default function DetalhesServico() {
 
         setLoading(false);
       } catch (err) {
-        console.error("Erro ao buscar detalhes do serviço:", err);
+        console.error('Erro ao buscar detalhes do serviço:', err);
         setError(err.message);
         setLoading(false);
       }
@@ -85,14 +85,14 @@ export default function DetalhesServico() {
 
   const handleMessage = async () => {
     if (!user) {
-      alert("Você precisa estar logado para enviar mensagens");
-      navigate("/login", { state: { from: location.pathname } });
+      alert('Você precisa estar logado para enviar mensagens');
+      navigate('/login', { state: { from: location.pathname } });
       return;
     }
 
     try {
       if (user.uid === service.user_id) {
-        alert("Você não pode iniciar um chat com você mesmo.");
+        alert('Você não pode iniciar um chat com você mesmo.');
         return;
       }
 
@@ -107,32 +107,32 @@ export default function DetalhesServico() {
           servicePrice: service.price,
           providerName: provider
             ? `${provider.first_name} ${provider.last_name}`
-            : "Prestador",
+            : 'Prestador',
           providerAvatar: provider?.avatar_url,
           createdAt: new Date().toISOString(),
         }
       );
 
-      navigate("/mensagens", {
+      navigate('/mensagens', {
         state: {
           chatInfo: {
             chatId,
             userId: service.user_id,
             name: provider
               ? `${provider.first_name} ${provider.last_name}`
-              : "Prestador",
+              : 'Prestador',
             avatar: provider?.avatar_url,
             serviceTitle: service.title,
           },
         },
       });
     } catch (error) {
-      if (error.code === "permission-denied") {
-        alert("Você precisa fazer login novamente para iniciar o chat.");
-        navigate("/login", { state: { from: location.pathname } });
+      if (error.code === 'permission-denied') {
+        alert('Você precisa fazer login novamente para iniciar o chat.');
+        navigate('/login', { state: { from: location.pathname } });
       } else {
         alert(
-          "Houve um erro ao iniciar a conversa. Por favor, tente novamente."
+          'Houve um erro ao iniciar a conversa. Por favor, tente novamente.'
         );
       }
     }
@@ -159,7 +159,7 @@ export default function DetalhesServico() {
         <Header />
         <div className="details-content">
           <div className="error-message">
-            <p>{error || "Erro ao carregar detalhes do serviço"}</p>
+            <p>{error || 'Erro ao carregar detalhes do serviço'}</p>
             <button className="btn-outline" onClick={() => navigate(-1)}>
               Voltar
             </button>
@@ -236,8 +236,8 @@ export default function DetalhesServico() {
             disabled={user?.uid === service.user_id}
           >
             {user?.uid === service.user_id
-              ? "Este é seu serviço"
-              : "Quero Contratar"}
+              ? 'Este é seu serviço'
+              : 'Quero Contratar'}
           </button>
         </motion.div>
       </div>

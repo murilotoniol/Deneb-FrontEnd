@@ -1,12 +1,6 @@
-import { useState, useEffect } from "react";
-import {
-  collection,
-  query,
-  getDocs,
-  doc,
-  getDoc,
-} from "firebase/firestore";
-import { db } from "../services/firebase";
+import { useState, useEffect } from 'react';
+import { collection, query, getDocs, doc, getDoc } from 'firebase/firestore';
+import { db } from '../services/firebase';
 
 export const useGetServices = () => {
   const [services, setServices] = useState([]);
@@ -17,29 +11,29 @@ export const useGetServices = () => {
     const fetchServices = async () => {
       try {
         // Buscar todas as ofertas de serviço
-        const offersQuery = query(collection(db, "service-offer"));
+        const offersQuery = query(collection(db, 'service-offer'));
         const offersSnapshot = await getDocs(offersQuery);
 
         // Array para armazenar as promessas de busca dos serviços base
-        const servicesPromises = offersSnapshot.docs.map(async (offerDoc) => {
+        const servicesPromises = offersSnapshot.docs.map(async offerDoc => {
           try {
             const offerData = offerDoc.data();
 
             // Verificar se offerData e service_id existem
             if (!offerData || !offerData.service_id) {
-              console.error("Oferta sem service_id:", offerDoc.id);
+              console.error('Oferta sem service_id:', offerDoc.id);
               return null;
             }
 
             // Buscar o serviço base correspondente
             const serviceDoc = await getDoc(
-              doc(db, "services", offerData.service_id)
+              doc(db, 'services', offerData.service_id)
             );
 
             // Verificar se o documento do serviço existe e tem dados
             if (!serviceDoc.exists()) {
               console.error(
-                "Serviço base não encontrado:",
+                'Serviço base não encontrado:',
                 offerData.service_id
               );
               return null;
@@ -55,7 +49,7 @@ export const useGetServices = () => {
               !serviceData.animalType
             ) {
               console.error(
-                "Dados do serviço base incompletos:",
+                'Dados do serviço base incompletos:',
                 offerData.service_id
               );
               return null;
@@ -73,7 +67,7 @@ export const useGetServices = () => {
               service_id: offerData.service_id, // Adicionando service_id para referência
             };
           } catch (err) {
-            console.error("Erro ao processar serviço:", err);
+            console.error('Erro ao processar serviço:', err);
             return null;
           }
         });
@@ -82,15 +76,13 @@ export const useGetServices = () => {
         const servicesData = await Promise.all(servicesPromises);
 
         // Filtrar resultados null e undefined
-        const validServices = servicesData.filter(
-          (service) => service !== null
-        );
+        const validServices = servicesData.filter(service => service !== null);
 
         setServices(validServices);
         setLoading(false);
       } catch (err) {
-        console.error("Erro ao buscar serviços:", err);
-        setError(err.message || "Erro ao carregar os serviços");
+        console.error('Erro ao buscar serviços:', err);
+        setError(err.message || 'Erro ao carregar os serviços');
         setLoading(false);
       }
     };

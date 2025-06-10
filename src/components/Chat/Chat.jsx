@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from 'react';
 import {
   Box,
   Paper,
@@ -6,11 +6,11 @@ import {
   IconButton,
   Typography,
   Avatar,
-} from "@mui/material";
-import { Send as SendIcon } from "@mui/icons-material";
-import { chatService } from "../../services/chatService";
-import { useAuth } from "../../hooks/useAuth"; // Assumindo que você tem um hook de autenticação
-import "./Chat.css";
+} from '@mui/material';
+import { Send as SendIcon } from '@mui/icons-material';
+import { chatService } from '../../services/chatService';
+import { useAuth } from '../../hooks/useAuth'; // Assumindo que você tem um hook de autenticação
+import './Chat.css';
 
 const Chat = ({
   otherUserId,
@@ -19,7 +19,7 @@ const Chat = ({
   chatId: initialChatId,
 }) => {
   const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState("");
+  const [newMessage, setNewMessage] = useState('');
   const [chatId, setChatId] = useState(initialChatId);
   const [loading, setLoading] = useState(true);
   const messagesContainerRef = useRef(null);
@@ -42,15 +42,15 @@ const Chat = ({
     const initializeChat = async () => {
       try {
         setLoading(true);
-        console.log("Inicializando chat com ID:", chatId);
+        console.log('Inicializando chat com ID:', chatId);
 
         // Começa a escutar as mensagens
-        unsubscribe = chatService.listenToMessages(chatId, (newMessages) => {
+        unsubscribe = chatService.listenToMessages(chatId, newMessages => {
           setMessages(newMessages);
           setLoading(false);
         });
       } catch (error) {
-        console.error("Erro ao inicializar chat:", error);
+        console.error('Erro ao inicializar chat:', error);
         setLoading(false);
       }
     };
@@ -61,7 +61,7 @@ const Chat = ({
 
     return () => {
       if (unsubscribe) {
-        console.log("Cancelando escuta de mensagens");
+        console.log('Cancelando escuta de mensagens');
         unsubscribe();
       }
     };
@@ -74,34 +74,34 @@ const Chat = ({
     }
   }, [initialChatId]);
 
-  const handleSendMessage = async (e) => {
+  const handleSendMessage = async e => {
     e.preventDefault();
 
     if (!newMessage.trim()) return;
 
     try {
       await chatService.sendMessage(chatId, user.uid, newMessage.trim());
-      setNewMessage("");
+      setNewMessage('');
     } catch (error) {
-      console.error("Erro ao enviar mensagem:", error);
+      console.error('Erro ao enviar mensagem:', error);
       // Aqui você pode adicionar um feedback visual do erro
     }
   };
 
-  const formatTimestamp = (timestamp) => {
-    if (!timestamp) return "";
+  const formatTimestamp = timestamp => {
+    if (!timestamp) return '';
     const date = new Date(timestamp);
-    return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
   };
 
   if (loading) {
     return (
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100%',
         }}
       >
         <Typography>Carregando mensagens...</Typography>
@@ -112,12 +112,12 @@ const Chat = ({
   return (
     <Box
       sx={{
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
-        bgcolor: "background.paper",
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        bgcolor: 'background.paper',
         borderRadius: 2,
-        overflow: "hidden",
+        overflow: 'hidden',
       }}
     >
       {/* Cabeçalho do chat */}
@@ -125,43 +125,54 @@ const Chat = ({
         sx={{
           p: 2,
           borderBottom: 1,
-          borderColor: "divider",
-          display: "flex",
-          alignItems: "center",
+          borderColor: 'divider',
+          display: 'flex',
+          alignItems: 'center',
           gap: 2,
         }}
       >
         <Avatar src={otherUserAvatar} alt={otherUserName}>
           {otherUserName?.charAt(0)}
         </Avatar>
-        <Typography variant="h6" color="primary">{otherUserName}</Typography>
+        <Typography variant="h6" color="primary">
+          {otherUserName}
+        </Typography>
       </Box>
 
       {/* Área de mensagens */}
       <Box
         className="messages-container"
         ref={messagesContainerRef}
-        sx={{ flex: 1, overflow: "auto", p: 2, display: "flex", flexDirection: "column", gap: 1 }}
+        sx={{
+          flex: 1,
+          overflow: 'auto',
+          p: 2,
+          display: 'flex',
+          flexDirection: 'column',
+          gap: 1,
+        }}
       >
-        {messages.map((message) => (
+        {messages.map(message => (
           <Box
             key={message.id}
             sx={{
-              display: "flex",
+              display: 'flex',
               justifyContent:
-                message.senderId === user.uid ? "flex-end" : "flex-start",
+                message.senderId === user.uid ? 'flex-end' : 'flex-start',
             }}
           >
-            <div className={`mensagem-card${message.senderId === user.uid ? " mensagem-usuario" : " mensagem-outro"}`}>
+            <div
+              className={`mensagem-card${message.senderId === user.uid ? ' mensagem-usuario' : ' mensagem-outro'}`}
+            >
               <Typography
                 variant="body1"
                 sx={{
-                  wordBreak: "break-word",
-                  whiteSpace: "pre-wrap",
+                  wordBreak: 'break-word',
+                  whiteSpace: 'pre-wrap',
                   fontWeight: 400,
-                  fontSize: "0.95rem",
+                  fontSize: '0.95rem',
                   lineHeight: 1.5,
-                  letterSpacing: "0.00938em",
+                  letterSpacing: '0.00938em',
                 }}
               >
                 {message.text}
@@ -169,10 +180,10 @@ const Chat = ({
               <Typography
                 variant="caption"
                 sx={{
-                  display: "block",
-                  textAlign: "right",
+                  display: 'block',
+                  textAlign: 'right',
                   mt: 0.5,
-                  fontSize: "0.75rem",
+                  fontSize: '0.75rem',
                   opacity: 0.7,
                 }}
               >
@@ -190,8 +201,8 @@ const Chat = ({
         sx={{
           p: 2,
           borderTop: 1,
-          borderColor: "divider",
-          display: "flex",
+          borderColor: 'divider',
+          display: 'flex',
           gap: 1,
         }}
       >
@@ -200,7 +211,7 @@ const Chat = ({
           variant="outlined"
           placeholder="Digite sua mensagem..."
           value={newMessage}
-          onChange={(e) => setNewMessage(e.target.value)}
+          onChange={e => setNewMessage(e.target.value)}
           size="small"
           className="message-input"
         />

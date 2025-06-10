@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import { auth, db } from "../services/firebase";
+import { useState, useEffect } from 'react';
+import { auth, db } from '../services/firebase';
 import {
   createUserWithEmailAndPassword,
   sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
   onAuthStateChanged,
-} from "firebase/auth";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+} from 'firebase/auth';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 export const useAuth = () => {
   const [loading, setLoading] = useState(true);
@@ -17,17 +17,17 @@ export const useAuth = () => {
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
+    const unsubscribe = onAuthStateChanged(auth, async user => {
       setUser(user);
 
       if (user) {
         try {
-          const userDoc = await getDoc(doc(db, "users", user.uid));
+          const userDoc = await getDoc(doc(db, 'users', user.uid));
           if (userDoc.exists()) {
             setUserData(userDoc.data());
           }
         } catch (error) {
-          console.error("Erro ao buscar dados do usuário:", error);
+          console.error('Erro ao buscar dados do usuário:', error);
         }
       } else {
         setUserData(null);
@@ -40,7 +40,7 @@ export const useAuth = () => {
     return () => unsubscribe();
   }, []);
 
-  const registerWithEmail = async (userData) => {
+  const registerWithEmail = async userData => {
     setLoading(true);
     setError(null);
 
@@ -52,7 +52,7 @@ export const useAuth = () => {
       );
       const user = userCredential.user;
 
-      await setDoc(doc(db, "users", user.uid), {
+      await setDoc(doc(db, 'users', user.uid), {
         first_name: userData.first_name,
         last_name: userData.last_name,
         cpf: userData.cpf,
@@ -63,20 +63,20 @@ export const useAuth = () => {
 
       return { success: true, userId: user.uid };
     } catch (error) {
-      let errorMessage = "Ocorreu um erro durante o cadastro.";
+      let errorMessage = 'Ocorreu um erro durante o cadastro.';
 
       switch (error.code) {
-        case "auth/email-already-in-use":
-          errorMessage = "Este e-mail já está em uso.";
+        case 'auth/email-already-in-use':
+          errorMessage = 'Este e-mail já está em uso.';
           break;
-        case "auth/invalid-email":
-          errorMessage = "E-mail inválido.";
+        case 'auth/invalid-email':
+          errorMessage = 'E-mail inválido.';
           break;
-        case "auth/operation-not-allowed":
-          errorMessage = "Operação não permitida.";
+        case 'auth/operation-not-allowed':
+          errorMessage = 'Operação não permitida.';
           break;
-        case "auth/weak-password":
-          errorMessage = "A senha é muito fraca.";
+        case 'auth/weak-password':
+          errorMessage = 'A senha é muito fraca.';
           break;
         default:
           errorMessage = error.message;
@@ -101,17 +101,17 @@ export const useAuth = () => {
       );
       return { success: true, userId: userCredential.user.uid };
     } catch (error) {
-      let errorMessage = "Erro ao fazer login.";
+      let errorMessage = 'Erro ao fazer login.';
 
       switch (error.code) {
-        case "auth/user-not-found":
-          errorMessage = "Usuário não encontrado.";
+        case 'auth/user-not-found':
+          errorMessage = 'Usuário não encontrado.';
           break;
-        case "auth/wrong-password":
-          errorMessage = "Senha incorreta.";
+        case 'auth/wrong-password':
+          errorMessage = 'Senha incorreta.';
           break;
-        case "auth/invalid-email":
-          errorMessage = "Email inválido.";
+        case 'auth/invalid-email':
+          errorMessage = 'Email inválido.';
           break;
         default:
           errorMessage = error.message;
@@ -124,7 +124,7 @@ export const useAuth = () => {
     }
   };
 
-  const resetPassword = async (email) => {
+  const resetPassword = async email => {
     setLoading(true);
     setError(null);
 
@@ -132,14 +132,14 @@ export const useAuth = () => {
       await sendPasswordResetEmail(auth, email);
       return { success: true };
     } catch (error) {
-      let errorMessage = "Erro ao enviar email de recuperação de senha.";
+      let errorMessage = 'Erro ao enviar email de recuperação de senha.';
 
       switch (error.code) {
-        case "auth/user-not-found":
-          errorMessage = "Não existe uma conta com este email.";
+        case 'auth/user-not-found':
+          errorMessage = 'Não existe uma conta com este email.';
           break;
-        case "auth/invalid-email":
-          errorMessage = "Email inválido.";
+        case 'auth/invalid-email':
+          errorMessage = 'Email inválido.';
           break;
         default:
           errorMessage = error.message;
@@ -157,8 +157,8 @@ export const useAuth = () => {
       await signOut(auth);
       return { success: true };
     } catch (error) {
-      setError("Erro ao fazer logout.");
-      return { success: false, error: "Erro ao fazer logout." };
+      setError('Erro ao fazer logout.');
+      return { success: false, error: 'Erro ao fazer logout.' };
     }
   };
 

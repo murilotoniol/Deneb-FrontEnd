@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   List,
   ListItem,
@@ -8,9 +8,9 @@ import {
   Typography,
   Box,
   Paper,
-} from "@mui/material";
-import { chatService } from "../../services/chatService";
-import { useAuth } from "../../hooks/useAuth";
+} from '@mui/material';
+import { chatService } from '../../services/chatService';
+import { useAuth } from '../../hooks/useAuth';
 
 const ChatList = ({ onChatSelect, selectedChatId }) => {
   const [chats, setChats] = useState([]);
@@ -23,24 +23,24 @@ const ChatList = ({ onChatSelect, selectedChatId }) => {
     const loadChats = async () => {
       try {
         setLoading(true);
-        console.log("Carregando lista de chats para usuário:", user?.uid);
+        console.log('Carregando lista de chats para usuário:', user?.uid);
 
         // Busca os chats iniciais
         const initialChats = await chatService.getUserChats(user.uid);
         setChats(initialChats);
 
         // Configura listeners para cada chat
-        initialChats.forEach((chat) => {
-          chatService.listenToChatUpdates(chat.id, (updatedChat) => {
-            setChats((prevChats) =>
-              prevChats.map((c) => (c.id === updatedChat.id ? updatedChat : c))
+        initialChats.forEach(chat => {
+          chatService.listenToChatUpdates(chat.id, updatedChat => {
+            setChats(prevChats =>
+              prevChats.map(c => (c.id === updatedChat.id ? updatedChat : c))
             );
           });
         });
 
         setLoading(false);
       } catch (error) {
-        console.error("Erro ao carregar chats:", error);
+        console.error('Erro ao carregar chats:', error);
         setLoading(false);
       }
     };
@@ -51,27 +51,27 @@ const ChatList = ({ onChatSelect, selectedChatId }) => {
 
     return () => {
       if (unsubscribeChats) {
-        console.log("Cancelando escuta de chats");
+        console.log('Cancelando escuta de chats');
         unsubscribeChats();
       }
     };
   }, [user?.uid]);
 
-  const formatLastMessageTime = (timestamp) => {
-    if (!timestamp) return "";
+  const formatLastMessageTime = timestamp => {
+    if (!timestamp) return '';
     const date = new Date(timestamp);
     const now = new Date();
     const diffDays = Math.floor((now - date) / (1000 * 60 * 60 * 24));
 
     if (diffDays === 0) {
       return date.toLocaleTimeString([], {
-        hour: "2-digit",
-        minute: "2-digit",
+        hour: '2-digit',
+        minute: '2-digit',
       });
     } else if (diffDays === 1) {
-      return "Ontem";
+      return 'Ontem';
     } else if (diffDays < 7) {
-      return date.toLocaleDateString([], { weekday: "long" });
+      return date.toLocaleDateString([], { weekday: 'long' });
     } else {
       return date.toLocaleDateString();
     }
@@ -81,10 +81,10 @@ const ChatList = ({ onChatSelect, selectedChatId }) => {
     return (
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100%',
         }}
       >
         <Typography>Carregando conversas...</Typography>
@@ -96,12 +96,12 @@ const ChatList = ({ onChatSelect, selectedChatId }) => {
     return (
       <Box
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100%",
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100%',
           p: 2,
-          textAlign: "center",
+          textAlign: 'center',
         }}
       >
         <Typography color="text.secondary">
@@ -116,10 +116,10 @@ const ChatList = ({ onChatSelect, selectedChatId }) => {
   return (
     <Paper
       sx={{
-        height: "100%",
-        overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
+        height: '100%',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
         borderRadius: 2,
       }}
     >
@@ -128,19 +128,19 @@ const ChatList = ({ onChatSelect, selectedChatId }) => {
         sx={{
           p: 2,
           borderBottom: 1,
-          borderColor: "divider",
+          borderColor: 'divider',
         }}
       >
         Conversas
       </Typography>
 
-      <List sx={{ flex: 1, overflow: "auto", px: 1 }}>
+      <List sx={{ flex: 1, overflow: 'auto', px: 1 }}>
         {chats
           .sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt))
-          .map((chat) => {
+          .map(chat => {
             // Determina o outro usuário no chat
             const otherUserId = Object.keys(chat.participants).find(
-              (id) => id !== user.uid
+              id => id !== user.uid
             );
 
             // Obter informações do outro usuário do participantsInfo
@@ -149,7 +149,7 @@ const ChatList = ({ onChatSelect, selectedChatId }) => {
 
             // Nome do usuário: prioriza participantsInfo, depois serviceInfo
             const userName =
-              otherUserInfo.name || serviceInfo.userName || "Usuário";
+              otherUserInfo.name || serviceInfo.userName || 'Usuário';
             // Avatar do usuário: prioriza participantsInfo, depois serviceInfo
             const userAvatar = otherUserInfo.avatar || serviceInfo.userAvatar;
 
@@ -169,11 +169,11 @@ const ChatList = ({ onChatSelect, selectedChatId }) => {
                 sx={{
                   borderRadius: 1,
                   mb: 0.5,
-                  "&.Mui-selected": {
-                    bgcolor: "primary.light",
-                    color: "white",
-                    "&:hover": {
-                      bgcolor: "primary.main",
+                  '&.Mui-selected': {
+                    bgcolor: 'primary.light',
+                    color: 'white',
+                    '&:hover': {
+                      bgcolor: 'primary.main',
                     },
                   },
                 }}
@@ -189,23 +189,23 @@ const ChatList = ({ onChatSelect, selectedChatId }) => {
                     <Box
                       component="span"
                       sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        alignItems: 'center',
                       }}
                     >
                       <Typography
                         component="span"
                         variant="body2"
                         sx={{
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          whiteSpace: "nowrap",
-                          maxWidth: "70%",
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                          maxWidth: '70%',
                           color: '#222',
                         }}
                       >
-                        {chat.lastMessage || "Nenhuma mensagem"}
+                        {chat.lastMessage || 'Nenhuma mensagem'}
                       </Typography>
                       <Typography
                         component="span"

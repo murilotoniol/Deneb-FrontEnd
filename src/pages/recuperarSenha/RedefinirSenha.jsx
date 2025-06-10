@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   getAuth,
   confirmPasswordReset,
   verifyPasswordResetCode,
-} from "firebase/auth";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import "./RecuperarSenha.css";
+} from 'firebase/auth';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import './RecuperarSenha.css';
 
 export default function RedefinirSenha() {
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const [messageType, setMessageType] = useState("error");
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [message, setMessage] = useState('');
+  const [messageType, setMessageType] = useState('error');
   const [loading, setLoading] = useState(false);
   const [oobCode, setOobCode] = useState(null);
   const navigate = useNavigate();
@@ -21,42 +21,42 @@ export default function RedefinirSenha() {
   useEffect(() => {
     // Extrair o código de redefinição da URL
     const queryParams = new URLSearchParams(location.search);
-    const code = queryParams.get("oobCode");
+    const code = queryParams.get('oobCode');
 
     if (code) {
       setOobCode(code);
       // Verificar se o código é válido
       verifyCode(code);
     } else {
-      setMessage("Link inválido de redefinição de senha.");
-      setMessageType("error");
+      setMessage('Link inválido de redefinição de senha.');
+      setMessageType('error');
     }
   }, [location]);
 
-  const verifyCode = async (code) => {
+  const verifyCode = async code => {
     try {
       const auth = getAuth();
       await verifyPasswordResetCode(auth, code);
     } catch (error) {
-      setMessage("Este link de redefinição de senha é inválido ou expirou.");
-      setMessageType("error");
+      setMessage('Este link de redefinição de senha é inválido ou expirou.');
+      setMessageType('error');
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     setLoading(true);
 
     if (newPassword !== confirmPassword) {
-      setMessage("As senhas não coincidem");
-      setMessageType("error");
+      setMessage('As senhas não coincidem');
+      setMessageType('error');
       setLoading(false);
       return;
     }
 
     if (newPassword.length < 8) {
-      setMessage("A senha deve ter pelo menos 8 caracteres");
-      setMessageType("error");
+      setMessage('A senha deve ter pelo menos 8 caracteres');
+      setMessageType('error');
       setLoading(false);
       return;
     }
@@ -64,32 +64,32 @@ export default function RedefinirSenha() {
     try {
       const auth = getAuth();
       await confirmPasswordReset(auth, oobCode, newPassword);
-      setMessage("Senha alterada com sucesso!");
-      setMessageType("success");
+      setMessage('Senha alterada com sucesso!');
+      setMessageType('success');
 
       // Redirecionar para o login após alguns segundos
       setTimeout(() => {
-        navigate("/login");
+        navigate('/login');
       }, 3000);
     } catch (error) {
-      let errorMessage = "Erro ao redefinir a senha.";
+      let errorMessage = 'Erro ao redefinir a senha.';
 
       switch (error.code) {
-        case "auth/expired-action-code":
-          errorMessage = "Este link de redefinição de senha expirou.";
+        case 'auth/expired-action-code':
+          errorMessage = 'Este link de redefinição de senha expirou.';
           break;
-        case "auth/invalid-action-code":
-          errorMessage = "Este link de redefinição de senha é inválido.";
+        case 'auth/invalid-action-code':
+          errorMessage = 'Este link de redefinição de senha é inválido.';
           break;
-        case "auth/weak-password":
-          errorMessage = "A senha é muito fraca. Use pelo menos 6 caracteres.";
+        case 'auth/weak-password':
+          errorMessage = 'A senha é muito fraca. Use pelo menos 6 caracteres.';
           break;
         default:
           errorMessage = error.message;
       }
 
       setMessage(errorMessage);
-      setMessageType("error");
+      setMessageType('error');
     } finally {
       setLoading(false);
     }
@@ -109,7 +109,7 @@ export default function RedefinirSenha() {
               name="newPassword"
               placeholder="Digite sua nova senha"
               value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
+              onChange={e => setNewPassword(e.target.value)}
               required
               aria-label="Nova Senha"
               aria-required="true"
@@ -124,7 +124,7 @@ export default function RedefinirSenha() {
               name="confirmPassword"
               placeholder="Confirme sua nova senha"
               value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
+              onChange={e => setConfirmPassword(e.target.value)}
               required
               aria-label="Confirme a Nova Senha"
               aria-required="true"
@@ -134,7 +134,7 @@ export default function RedefinirSenha() {
           {message && <ErrorMessage message={message} type={messageType} />}
 
           <button type="submit" disabled={loading} className="submit-button">
-            {loading ? "Alterando..." : "Alterar Senha"}
+            {loading ? 'Alterando...' : 'Alterar Senha'}
           </button>
         </form>
       </div>

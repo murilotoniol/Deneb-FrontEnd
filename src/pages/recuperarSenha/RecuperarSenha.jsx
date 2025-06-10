@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import { useAuth } from "../../hooks/useAuth";
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
+import { useAuth } from '../../hooks/useAuth';
 import {
   Box,
   Container,
@@ -11,35 +11,35 @@ import {
   Paper,
   CircularProgress,
   Link as MuiLink,
-} from "@mui/material";
-import { PawPrint } from "lucide-react";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
+} from '@mui/material';
+import { PawPrint } from 'lucide-react';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 export default function RecuperarSenha() {
   const navigate = useNavigate();
   const { loading, error: authError, resetPassword } = useAuth();
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
 
     if (!email) {
-      setMessage("Por favor, insira seu email");
+      setMessage('Por favor, insira seu email');
       return;
     }
 
     try {
       await resetPassword(email);
       setMessage(
-        "Email de recuperação enviado. Por favor, verifique sua caixa de entrada."
+        'Email de recuperação enviado. Por favor, verifique sua caixa de entrada.'
       );
       setTimeout(() => {
-        navigate("/login");
+        navigate('/login');
       }, 3000);
     } catch (error) {
-      setMessage("Erro ao enviar email de recuperação. Tente novamente.");
+      setMessage('Erro ao enviar email de recuperação. Tente novamente.');
     }
   };
 
@@ -47,11 +47,11 @@ export default function RecuperarSenha() {
     return (
       <Box
         sx={{
-          height: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
+          height: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column',
           gap: 2,
         }}
       >
@@ -64,15 +64,17 @@ export default function RecuperarSenha() {
   return (
     <div>
       <Header />
-      <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <Box
+        sx={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}
+      >
         <Container
           component="main"
           maxWidth="xs"
           sx={{
             flex: 1,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
             py: 4,
           }}
         >
@@ -80,17 +82,17 @@ export default function RecuperarSenha() {
             elevation={3}
             sx={{
               p: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              width: "100%",
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: '100%',
               borderRadius: 2,
             }}
           >
             <Box
               sx={{
-                display: "flex",
-                alignItems: "center",
+                display: 'flex',
+                alignItems: 'center',
                 gap: 1,
                 mb: 3,
               }}
@@ -100,7 +102,11 @@ export default function RecuperarSenha() {
                 Recuperar Senha
               </Typography>
             </Box>
-            <Box component="form" onSubmit={handleSubmit} sx={{ width: "100%" }}>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              sx={{ width: '100%' }}
+            >
               <TextField
                 margin="normal"
                 required
@@ -111,13 +117,13 @@ export default function RecuperarSenha() {
                 autoComplete="email"
                 autoFocus
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={e => setEmail(e.target.value)}
                 sx={{ mb: 2 }}
               />
               {message && (
                 <ErrorMessage
                   message={message}
-                  type={message.includes("enviado") ? "success" : "error"}
+                  type={message.includes('enviado') ? 'success' : 'error'}
                 />
               )}
               {authError && <ErrorMessage message={authError} type="error" />}
@@ -131,16 +137,20 @@ export default function RecuperarSenha() {
                   mb: 2,
                   py: 1.5,
                   borderRadius: 2,
-                  textTransform: "none",
-                  fontSize: "1rem",
+                  textTransform: 'none',
+                  fontSize: '1rem',
                 }}
               >
-                {loading ? "Enviando..." : "Enviar"}
+                {loading ? 'Enviando...' : 'Enviar'}
               </Button>
-              <Box sx={{ textAlign: "center", mt: 2 }}>
+              <Box sx={{ textAlign: 'center', mt: 2 }}>
                 <Typography variant="body2">
                   Lembrou sua senha?{' '}
-                  <MuiLink href="/login" color="primary" sx={{ fontWeight: 600 }}>
+                  <MuiLink
+                    href="/login"
+                    color="primary"
+                    sx={{ fontWeight: 600 }}
+                  >
                     Voltar para o login
                   </MuiLink>
                 </Typography>

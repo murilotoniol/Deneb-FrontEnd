@@ -23,4 +23,4 @@ export function MenuProvider({ children }) {
       <AsideMenu open={isMenuOpen} onClose={closeMenu} />
     </MenuContext.Provider>
   );
-} 
+}

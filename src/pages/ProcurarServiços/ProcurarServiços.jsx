@@ -1,11 +1,11 @@
-import React, { useMemo } from "react";
-import { MapPin, PawPrint, DollarSign } from "lucide-react";
-import { motion } from "framer-motion";
-import { useNavigate, useLocation } from "react-router-dom";
-import "./ProcurarServiços.css";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
-import { useGetServices } from "../../hooks/useGetServices";
+import React, { useMemo } from 'react';
+import { MapPin, PawPrint, DollarSign } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { useNavigate, useLocation } from 'react-router-dom';
+import './ProcurarServiços.css';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
+import { useGetServices } from '../../hooks/useGetServices';
 
 export default function FindService() {
   const { services, loading, error } = useGetServices();
@@ -14,14 +14,14 @@ export default function FindService() {
 
   // Pega o termo de busca da query string
   const params = new URLSearchParams(location.search);
-  const busca = params.get("busca") || "";
+  const busca = params.get('busca') || '';
 
   // Filtra os serviços por nome ou categoria
   const filteredServices = useMemo(() => {
     if (!busca.trim()) return services;
     const termo = busca.trim().toLowerCase();
     return services.filter(
-      (service) =>
+      service =>
         service.title.toLowerCase().includes(termo) ||
         service.type.toLowerCase().includes(termo)
     );
@@ -81,7 +81,7 @@ export default function FindService() {
               <p>Nenhum serviço encontrado para sua busca.</p>
             </div>
           ) : (
-            filteredServices.map((service) => (
+            filteredServices.map(service => (
               <motion.div
                 key={service.id}
                 className="service-card"

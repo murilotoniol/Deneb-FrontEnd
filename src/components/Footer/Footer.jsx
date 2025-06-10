@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 import '../Footer/Footer.css';
-import logo from "../../assets/logo.png";
+import logo from '../../assets/logo.png';
 
 export default function Footer() {
   return (
@@ -20,7 +20,11 @@ export default function Footer() {
                   </div>
                   <div>
                     <p>
-                      Somos a revolução no mercado de serviços, disponibilizando uma plataforma moderna que permite que o comprador decida entre diversos serviços para seu pet e em contato com o vendedor para a negociação. Tudo isso com praticidade e segurança.
+                      Somos a revolução no mercado de serviços, disponibilizando
+                      uma plataforma moderna que permite que o comprador decida
+                      entre diversos serviços para seu pet e em contato com o
+                      vendedor para a negociação. Tudo isso com praticidade e
+                      segurança.
                     </p>
                   </div>
                 </div>
@@ -33,10 +37,18 @@ export default function Footer() {
                 <h3 className="title-widget">ACESSO RÁPIDO</h3>
                 <div className="text-widget">
                   <ul>
-                    <li><a href="/ofertaservico">Anunciar</a></li>
-                    <li><a href="/perguntas-frequentes">Perguntas frequentes</a></li>
-                    <li><a href="/categorias">Categorias</a></li>
-                    <li><a href="/central-de-ajuda">Central de Ajuda</a></li>
+                    <li>
+                      <a href="/ofertaservico">Anunciar</a>
+                    </li>
+                    <li>
+                      <a href="/perguntas-frequentes">Perguntas frequentes</a>
+                    </li>
+                    <li>
+                      <a href="/categorias">Categorias</a>
+                    </li>
+                    <li>
+                      <a href="/central-de-ajuda">Central de Ajuda</a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -48,8 +60,12 @@ export default function Footer() {
                 <h3 className="title-widget">COMO FUNCIONA</h3>
                 <div className="text-widget">
                   <ul>
-                    <li><a href="/como-funciona">Como funciona</a></li>
-                    <li><a href="/vantagens">Vantagens</a></li>
+                    <li>
+                      <a href="/como-funciona">Como funciona</a>
+                    </li>
+                    <li>
+                      <a href="/vantagens">Vantagens</a>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -61,13 +77,18 @@ export default function Footer() {
                 <h3 className="title-widget">INSTITUCIONAL</h3>
                 <div className="text-widget">
                   <ul>
-                    <li><a href="/termos-de-uso">Termos de uso</a></li>
-                    <li><a href="/politica-de-privacidade">Política de privacidade</a></li>
+                    <li>
+                      <a href="/termos-de-uso">Termos de uso</a>
+                    </li>
+                    <li>
+                      <a href="/politica-de-privacidade">
+                        Política de privacidade
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>

@@ -62,13 +62,13 @@ jest.mock("firebase/firestore", () => ({
         email: "test@example.com",
         name: "Test User",
       }),
-    })
+    }),
   ),
 }));
 
 const renderPrivateRoute = (
   isAuthenticated,
-  initialEntries = ["/protected"]
+  initialEntries = ["/protected"],
 ) => {
   mockLocalStorage.getItem.mockReturnValue(isAuthenticated ? "true" : null);
 
@@ -97,7 +97,7 @@ const renderPrivateRoute = (
           />
         </Routes>
       </MemoryRouter>
-    </AuthProvider>
+    </AuthProvider>,
   );
 };
 

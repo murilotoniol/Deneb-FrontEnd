@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
+import React, { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
 import {
   validateCPF,
   validatePhone,
   validatePassword,
   validateDate,
-} from "../../utils/validation.js";
-import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+} from '../../utils/validation.js';
+import ErrorMessage from '../../components/ErrorMessage/ErrorMessage';
 import {
   Box,
   Container,
@@ -17,24 +17,24 @@ import {
   Paper,
   CircularProgress,
   Link as MuiLink,
-} from "@mui/material";
-import { PawPrint } from "lucide-react";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
+} from '@mui/material';
+import { PawPrint } from 'lucide-react';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 export default function Cadastro() {
   const navigate = useNavigate();
   const { loading, error: authError, registerWithEmail } = useAuth();
 
   const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
-    email: "",
-    cpf: "",
-    phone_number: "",
-    birth_date: "",
-    password: "",
-    confirmPassword: "",
+    first_name: '',
+    last_name: '',
+    email: '',
+    cpf: '',
+    phone_number: '',
+    birth_date: '',
+    password: '',
+    confirmPassword: '',
   });
 
   const [formErrors, setFormErrors] = useState({});
@@ -43,41 +43,41 @@ export default function Cadastro() {
   const validateForm = () => {
     const errors = {};
     if (!formData.first_name.trim()) {
-      errors.first_name = "Nome é obrigatório";
+      errors.first_name = 'Nome é obrigatório';
     }
     if (!formData.last_name.trim()) {
-      errors.last_name = "Sobrenome é obrigatório";
+      errors.last_name = 'Sobrenome é obrigatório';
     }
     if (!formData.email.trim()) {
-      errors.email = "Email é obrigatório";
+      errors.email = 'Email é obrigatório';
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      errors.email = "Email inválido";
+      errors.email = 'Email inválido';
     }
     if (!validateCPF(formData.cpf)) {
-      errors.cpf = "CPF inválido";
+      errors.cpf = 'CPF inválido';
     }
     if (!validatePhone(formData.phone_number)) {
-      errors.phone_number = "Telefone inválido";
+      errors.phone_number = 'Telefone inválido';
     }
     if (!validateDate(formData.birth_date)) {
-      errors.birth_date = "Data de nascimento inválida";
+      errors.birth_date = 'Data de nascimento inválida';
     }
     const passwordValidation = validatePassword(formData.password);
     if (!passwordValidation.isValid) {
       errors.password =
-        "A senha deve conter pelo menos 8 caracteres, uma letra maiúscula, uma minúscula, um número e um caractere especial";
+        'A senha deve conter pelo menos 8 caracteres, uma letra maiúscula, uma minúscula, um número e um caractere especial';
     }
     if (formData.password !== formData.confirmPassword) {
-      errors.confirmPassword = "As senhas não coincidem";
+      errors.confirmPassword = 'As senhas não coincidem';
     }
     return errors;
   };
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleRegister = async (e) => {
+  const handleRegister = async e => {
     e.preventDefault();
     setSubmitAttempted(true);
     const errors = validateForm();
@@ -85,7 +85,7 @@ export default function Cadastro() {
     if (Object.keys(errors).length === 0) {
       const result = await registerWithEmail(formData);
       if (result.success) {
-        navigate("/login");
+        navigate('/login');
       }
     }
   };
@@ -94,11 +94,11 @@ export default function Cadastro() {
     return (
       <Box
         sx={{
-          height: "100vh",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
+          height: '100vh',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexDirection: 'column',
           gap: 2,
         }}
       >
@@ -111,15 +111,22 @@ export default function Cadastro() {
   return (
     <div>
       <Header />
-      <Box sx={{ minHeight: "100vh", display: "flex", flexDirection: "column", paddingTop: '10vh' }}>
+      <Box
+        sx={{
+          minHeight: '100vh',
+          display: 'flex',
+          flexDirection: 'column',
+          paddingTop: '10vh',
+        }}
+      >
         <Container
           component="main"
           maxWidth="xs"
           sx={{
             flex: 1,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
             py: 4,
           }}
         >
@@ -127,17 +134,17 @@ export default function Cadastro() {
             elevation={3}
             sx={{
               p: 4,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              width: "100%",
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              width: '100%',
               borderRadius: 2,
             }}
           >
             <Box
               sx={{
-                display: "flex",
-                alignItems: "center",
+                display: 'flex',
+                alignItems: 'center',
                 gap: 1,
                 mb: 2,
               }}
@@ -150,7 +157,11 @@ export default function Cadastro() {
             <Typography variant="subtitle1" sx={{ mb: 2 }}>
               Preencha os dados abaixo:
             </Typography>
-            <Box component="form" onSubmit={handleRegister} sx={{ width: "100%" }}>
+            <Box
+              component="form"
+              onSubmit={handleRegister}
+              sx={{ width: '100%' }}
+            >
               <TextField
                 margin="normal"
                 required
@@ -275,16 +286,21 @@ export default function Cadastro() {
                   mb: 2,
                   py: 1.5,
                   borderRadius: 2,
-                  textTransform: "none",
-                  fontSize: "1rem",
+                  textTransform: 'none',
+                  fontSize: '1rem',
                 }}
               >
-                {loading ? "Registrando..." : "Registrar"}
+                {loading ? 'Registrando...' : 'Registrar'}
               </Button>
-              <Box sx={{ textAlign: "center", mt: 2 }}>
+              <Box sx={{ textAlign: 'center', mt: 2 }}>
                 <Typography variant="body2">
                   Já tem uma conta?{' '}
-                  <MuiLink component={Link} to="/login" color="primary" sx={{ fontWeight: 600 }}>
+                  <MuiLink
+                    component={Link}
+                    to="/login"
+                    color="primary"
+                    sx={{ fontWeight: 600 }}
+                  >
                     Entrar
                   </MuiLink>
                 </Typography>

@@ -1,6 +1,6 @@
-import { useEffect } from "react";
-import { userService } from "../services/userService";
-import { useAuth } from "./useAuth";
+import { useEffect } from 'react';
+import { userService } from '../services/userService';
+import { useAuth } from './useAuth';
 
 export const usePresence = () => {
   const { user } = useAuth();
@@ -19,15 +19,15 @@ export const usePresence = () => {
     const onBeforeUnload = () => userService.updateUserStatus(user.uid, false);
 
     // Adiciona os listeners
-    window.addEventListener("online", onOnline);
-    window.addEventListener("offline", onOffline);
-    window.addEventListener("beforeunload", onBeforeUnload);
+    window.addEventListener('online', onOnline);
+    window.addEventListener('offline', onOffline);
+    window.addEventListener('beforeunload', onBeforeUnload);
 
     // Cleanup function
     return () => {
-      window.removeEventListener("online", onOnline);
-      window.removeEventListener("offline", onOffline);
-      window.removeEventListener("beforeunload", onBeforeUnload);
+      window.removeEventListener('online', onOnline);
+      window.removeEventListener('offline', onOffline);
+      window.removeEventListener('beforeunload', onBeforeUnload);
       userService.updateUserStatus(user.uid, false);
     };
   }, [user?.uid]);

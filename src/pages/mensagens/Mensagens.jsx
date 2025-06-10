@@ -13,8 +13,8 @@ import Chat from "../../components/Chat/Chat";
 import { useAuth } from "../../hooks/useAuth";
 import { usePresence } from "../../hooks/usePresence";
 import { chatService } from "../../services/chatService";
-import Header from '../../components/Header/Header';
-import Footer from '../../components/Footer/Footer';
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 import "./Mensagens.css";
 
 const Mensagens = () => {
@@ -66,7 +66,7 @@ const Mensagens = () => {
         const chatId = await chatService.createOrGetChat(
           user.uid,
           chatInfo.userId,
-          chatInfo.serviceInfo
+          chatInfo.serviceInfo,
         );
 
         console.log("Mensagens: Chat inicializado com sucesso", { chatId });
@@ -159,8 +159,8 @@ const Mensagens = () => {
                     Selecione uma conversa para começar a chatear
                   </Typography>
                   <Typography variant="body2" color="text.secondary">
-                    Ou volte para a página do serviço e clique em "Mensagem" para
-                    iniciar uma nova conversa
+                    Ou volte para a página do serviço e clique em "Mensagem"
+                    para iniciar uma nova conversa
                   </Typography>
                 </Box>
               )}

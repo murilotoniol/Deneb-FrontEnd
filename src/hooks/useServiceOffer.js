@@ -1,12 +1,8 @@
 // src/hooks/useServiceOffer.js
 
-import { useState } from "react";
-import {
-  collection,
-  addDoc,
-  serverTimestamp,
-} from "firebase/firestore";
-import { auth, db } from "../services/firebase"; // Importa a instância de autenticação e db do Firebase
+import { useState } from 'react';
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
+import { auth, db } from '../services/firebase'; // Importa a instância de autenticação e db do Firebase
 // import { validateServiceOffer } from "../utils/validateServiceOffer"; // Removido se a validação for movida para o componente
 
 export const useServiceOffer = () => {
@@ -31,12 +27,12 @@ export const useServiceOffer = () => {
       // Verifica se há um usuário autenticado e se o userId passado corresponde.
       // Esta é uma verificação de segurança essencial.
       if (!user || user.uid !== userId) {
-        throw new Error("Usuário não autenticado ou ID de usuário inválido.");
+        throw new Error('Usuário não autenticado ou ID de usuário inválido.');
       }
 
       // Adiciona um novo documento à coleção "service-offer" no Firestore.
       // Agora, ele referencia o serviço base pelo service_id.
-      await addDoc(collection(db, "service-offer"), {
+      await addDoc(collection(db, 'service-offer'), {
         user_id: userId, // ID do usuário que está criando a oferta
         service_id: offerData.service_id, // ID do serviço base (do useService)
         price: Number(offerData.price), // Garante que o preço seja um número
@@ -46,7 +42,7 @@ export const useServiceOffer = () => {
       return { success: true };
     } catch (err) {
       const message =
-        err.message || "Erro desconhecido ao cadastrar a oferta de serviço.";
+        err.message || 'Erro desconhecido ao cadastrar a oferta de serviço.';
       setError(message);
       return { success: false, error: message };
     } finally {
