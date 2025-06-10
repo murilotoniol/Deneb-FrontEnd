@@ -1,0 +1,166 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.login-page {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background-image: url("../../assets/backgroundImage.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+}
+
+.formulario {
+  width: 22%;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-right: 100px;
+}
+
+.forms h1 {
+  text-align: center;
+  font-size: 30px;
+  color: #42a5f6;
+}
+
+.forms .input-field {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  margin: 40px auto;
+}
+
+.forms .input-field label {
+  font-size: 20px;
+  color: #42a5f6;
+}
+
+.forms .input-field input {
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  outline: none;
+  border: 2px solid rgba(5, 5, 5, 0.2);
+  border-radius: 40px;
+  font-size: 16px;
+  color: #333;
+  padding: 20px 45px 20px 25px;
+}
+
+.input-field input::placeholder {
+  color: #aaa;
+}
+
+.forms .recall-forget {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14.5px;
+  margin: 10px 0;
+}
+
+.forms .recall-forget label {
+  color: black;
+}
+
+.forms .recall-forget a {
+  color: #5591a9;
+}
+
+.forms button {
+  width: 100%;
+  height: 45px;
+  background: #42a5f6;
+  border: none;
+  outline: none;
+  border-radius: 40px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.recall-forget label input {
+  accent-color: #5591a9;
+  margin-right: 4px;
+}
+
+.forms .signup-link {
+  font-size: 14.5px;
+  text-align: center;
+  margin: 20px 0 15px;
+}
+
+.signup-link p {
+  color: black;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signup-link p a {
+  color: #5591a9;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signup-link p a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos específicos que não são cobertos pelo Material-UI */
+.loading-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Customização do tema Material-UI */
+.MuiPaper-root {
+  background-color: #ffffff !important;
+}
+
+.MuiButton-contained {
+  background-color: #42a5f6 !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+  transition: all 0.3s ease !important;
+}
+
+.MuiButton-contained:hover {
+  background-color: #1976d2 !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+.MuiTextField-root {
+  margin-bottom: 1rem !important;
+}
+
+.MuiCheckbox-root {
+  color: #42a5f6 !important;
+}
+
+.MuiLink-root {
+  text-decoration: none !important;
+  color: #42a5f6 !important;
+  transition: color 0.3s ease !important;
+}
+
+.MuiLink-root:hover {
+  color: #1976d2 !important;
+  text-decoration: underline !important;
+}

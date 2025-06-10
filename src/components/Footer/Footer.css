@@ -1,0 +1,75 @@
+.footer {
+  background-color: #1c1c1c;
+  color: #ffffff;
+  padding: 60px 0 20px;
+  font-family: 'Segoe UI', sans-serif;
+  width: 100%;
+}
+
+.container {
+  width: 100%;
+  padding: 0 60px;
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.imagem-logo {
+  max-width: 5%;
+}
+.widget {
+  margin-bottom: 30px;
+}
+
+.title-widget {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 15px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+.text-widget ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.text-widget ul li {
+  margin-bottom: 10px;
+}
+
+.text-widget ul li a {
+  color: #bbbbbb;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.text-widget ul li a:hover {
+  color: #ffffff;
+}
+
+.text-widget p {
+  color: #cccccc;
+  font-size: 14px;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.hr-footer {
+  border: 0;
+  height: 1px;
+  background-color: #666;
+  margin: 20px 0;
+}
+
+.copyright-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+}
