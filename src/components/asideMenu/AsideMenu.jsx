@@ -41,7 +41,7 @@ export default function AsideMenu({ open, onClose }) {
   };
 
   const goToServicosContratados = () => {
-    navigate('/servicos-contratados');
+    navigate('/pagina-inexistente');
     onClose();
   };
 

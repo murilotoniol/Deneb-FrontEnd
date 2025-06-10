@@ -19,6 +19,7 @@ import Perfil from './pages/perfil/Perfil';
 import Categorias from './pages/categorias/Categorias';
 import ServicosContratados from './pages/servicosContratados/ServicosContratados';
 import MeusServicos from './pages/meusServicos/MeusServicos';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
@@ -81,6 +82,7 @@ function App() {
               </PrivateRoute>
             }
           />
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </MenuProvider>
     </AuthProvider>
