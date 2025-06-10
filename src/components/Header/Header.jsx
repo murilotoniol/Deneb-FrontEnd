@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from "react-router-dom";
 import "../Header/Header.css";
 import logo from "../../assets/logoHeader.png";
 import MenuIcon from "@mui/icons-material/Menu";
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import SearchIcon from '@mui/icons-material/Search';
-import { useMenu } from '../MenuProvider/MenuProvider';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import SearchIcon from "@mui/icons-material/Search";
+import { useMenu } from "../MenuProvider/MenuProvider";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -29,13 +29,25 @@ export default function Header() {
 
   return (
     <header className="Header">
-      <div className="image" onClick={goToHome} style={{ cursor: 'pointer' }}>
+      <div className="image" onClick={goToHome} style={{ cursor: "pointer" }}>
         <img src={logo} alt="teste" className="logo" />
       </div>
 
       {/* Barra de pesquisa! */}
-      <form className="search-bar" onSubmit={handleSearch} style={{margin:0}}>
-        <button type="submit" style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+      <form
+        className="search-bar"
+        onSubmit={handleSearch}
+        style={{ margin: 0 }}
+      >
+        <button
+          type="submit"
+          style={{
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: 0,
+          }}
+        >
           <SearchIcon style={{ color: "#666", marginLeft: "10px" }} />
         </button>
         <input
@@ -43,23 +55,26 @@ export default function Header() {
           placeholder="Serviço, usuário ou categoria"
           className="search-input"
           value={search}
-          onChange={e => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </form>
 
       <div className="header-buttons">
-        <Link to="/categorias" className="link-categorias" class="link-categorias">
+        <Link to="/categorias" className="link-categorias">
           <p>Categorias</p>
         </Link>
 
-        <button className="button-anunciar" 
+        <button
+          className="button-anunciar"
           type="button"
           onClick={goToOfertarServico}
         >
           <p>Anunciar</p>
         </button>
 
-        <button className="button-carrinho" style={{
+        <button
+          className="button-carrinho"
+          style={{
             backgroundColor: "transparent",
             border: "none",
             cursor: "pointer",
@@ -70,6 +85,7 @@ export default function Header() {
 
         <button
           onClick={openMenu}
+          data-testid="menu-button"
           style={{
             backgroundColor: "transparent",
             border: "none",
