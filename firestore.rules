@@ -1,0 +1,53 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Função auxiliar para verificar autenticação
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Função auxiliar para verificar se o usuário é participante do chat
+    function isParticipant(chatData) {
+      return isAuthenticated() && 
+             chatData.participants[request.auth.uid] == true;
+    }
+
+    // Função auxiliar para verificar se o usuário será participante do novo chat
+    function willBeParticipant(chatData) {
+      return isAuthenticated() && 
+             chatData.participants[request.auth.uid] == true;
+    }
+
+    // Função auxiliar para verificar se o ID do chat é válido
+    function isValidChatId(chatId) {
+      let parts = chatId.split('_');
+      return parts.length == 2 && 
+             (parts[0] == request.auth.uid || parts[1] == request.auth.uid);
+    }
+
+    match /users/{userId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    match /services/{serviceId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    match /service-offer/{serviceOfferId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // Rules for chats collection
+    match /chats/{chatId} {
+      allow read, write: if isAuthenticated();
+
+      // Rules for messages subcollection
+      match /messages/{messageId} {
+        allow read, write: if isAuthenticated();
+      }
+    }
+  }
+} 
