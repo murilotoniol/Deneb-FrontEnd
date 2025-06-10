@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { Send as SendIcon } from '@mui/icons-material';
 import { chatService } from '../../services/chatService';
-import { useAuth } from '../../hooks/useAuth'; // Assumindo que você tem um hook de autenticação
+import { useAuth } from '../../hooks/useAuth';
 import './Chat.css';
 
 const Chat = ({
@@ -43,8 +43,6 @@ const Chat = ({
       try {
         setLoading(true);
         console.log('Inicializando chat com ID:', chatId);
-
-        // Começa a escutar as mensagens
         unsubscribe = chatService.listenToMessages(chatId, newMessages => {
           setMessages(newMessages);
           setLoading(false);
@@ -67,7 +65,6 @@ const Chat = ({
     };
   }, [chatId]);
 
-  // Atualiza o chatId quando ele for fornecido externamente
   useEffect(() => {
     if (initialChatId) {
       setChatId(initialChatId);
@@ -76,15 +73,12 @@ const Chat = ({
 
   const handleSendMessage = async e => {
     e.preventDefault();
-
     if (!newMessage.trim()) return;
-
     try {
       await chatService.sendMessage(chatId, user.uid, newMessage.trim());
       setNewMessage('');
     } catch (error) {
       console.error('Erro ao enviar mensagem:', error);
-      // Aqui você pode adicionar um feedback visual do erro
     }
   };
 
@@ -120,7 +114,6 @@ const Chat = ({
         overflow: 'hidden',
       }}
     >
-      {/* Cabeçalho do chat */}
       <Box
         sx={{
           p: 2,
@@ -138,8 +131,6 @@ const Chat = ({
           {otherUserName}
         </Typography>
       </Box>
-
-      {/* Área de mensagens */}
       <Box
         className="messages-container"
         ref={messagesContainerRef}
@@ -193,8 +184,6 @@ const Chat = ({
           </Box>
         ))}
       </Box>
-
-      {/* Área de input */}
       <Box
         component="form"
         onSubmit={handleSendMessage}

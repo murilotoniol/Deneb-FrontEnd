@@ -30,61 +30,41 @@ export const createOrGetChat = async (userId1, userId2, serviceInfo = null) => {
       userId2,
       hasServiceInfo: !!serviceInfo,
     });
-
-    // Validações iniciais
     if (!userId1 || !userId2) {
       throw new Error('IDs de usuário são obrigatórios');
     }
-
     if (userId1 === userId2) {
       throw new Error('Não é possível criar chat com o mesmo usuário');
     }
-
-    // Cria um ID consistente ordenando os IDs dos usuários
     const chatId = [userId1, userId2].sort().join('_');
     console.log('ID do chat gerado:', chatId);
-
-    // Verificar se o db está inicializado
     if (!db) {
       throw new Error('Firestore não foi inicializado corretamente');
     }
-
     const chatRef = doc(db, 'chats', chatId);
     console.log('Referência do chat criada:', chatRef.path);
-
     const chatSnap = await getDoc(chatRef);
     console.log('Snapshot do chat obtido:', chatSnap.exists());
-
     if (!chatSnap.exists()) {
-      console.log(
-        'Chat não existe, buscando dados dos usuários para criar novo chat'
-      );
-
-      // Buscar informações dos usuários
+      console.log('Chat não existe, buscando dados dos usuários para criar novo chat');
       const [user1Doc, user2Doc] = await Promise.all([
         getDoc(doc(db, 'users', userId1)),
         getDoc(doc(db, 'users', userId2)),
       ]);
-
       if (!user1Doc.exists()) {
         console.error('Usuário 1 não encontrado:', userId1);
         throw new Error(`Usuário não encontrado: ${userId1}`);
       }
-
       if (!user2Doc.exists()) {
         console.error('Usuário 2 não encontrado:', userId2);
         throw new Error(`Usuário não encontrado: ${userId2}`);
       }
-
       const user1Data = user1Doc.data();
       const user2Data = user2Doc.data();
-
       console.log('Dados dos usuários obtidos com sucesso:', {
         user1: { id: userId1, hasData: !!user1Data },
         user2: { id: userId2, hasData: !!user2Data },
       });
-
-      // Remover campos que possam causar problemas
       const sanitizedServiceInfo = serviceInfo
         ? {
             serviceId: serviceInfo.serviceId,
@@ -95,7 +75,6 @@ export const createOrGetChat = async (userId1, userId2, serviceInfo = null) => {
             providerName: serviceInfo.providerName,
           }
         : null;
-
       const chatData = {
         participants: {
           [userId1]: true,
@@ -122,7 +101,6 @@ export const createOrGetChat = async (userId1, userId2, serviceInfo = null) => {
         createdAt: serverTimestamp(),
         serviceInfo: sanitizedServiceInfo,
       };
-
       console.log('Tentando criar documento de chat com estrutura:', {
         participants: chatData.participants,
         participantsInfo: chatData.participantsInfo,
@@ -130,7 +108,6 @@ export const createOrGetChat = async (userId1, userId2, serviceInfo = null) => {
         hasServiceInfo: !!chatData.serviceInfo,
         serviceInfo: chatData.serviceInfo,
       });
-
       try {
         await setDoc(chatRef, chatData);
         console.log('Chat criado com sucesso');
@@ -144,49 +121,38 @@ export const createOrGetChat = async (userId1, userId2, serviceInfo = null) => {
         });
         throw setDocError;
       }
-    } else {
-      console.log('Chat já existe:', chatId);
-
-      if (serviceInfo) {
-        // Sanitizar serviceInfo mesmo para atualização
-        const sanitizedServiceInfo = {
-          serviceId: serviceInfo.serviceId,
-          serviceTitle: serviceInfo.serviceTitle,
-          serviceName: serviceInfo.serviceName,
-          serviceType: serviceInfo.serviceType,
-          servicePrice: Number(serviceInfo.servicePrice),
-          providerName: serviceInfo.providerName,
+    }
+    console.log('Chat já existe:', chatId);
+    if (serviceInfo) {
+      const sanitizedServiceInfo = {
+        serviceId: serviceInfo.serviceId,
+        serviceTitle: serviceInfo.serviceTitle,
+        serviceName: serviceInfo.serviceName,
+        serviceType: serviceInfo.serviceType,
+        servicePrice: Number(serviceInfo.servicePrice),
+        providerName: serviceInfo.providerName,
+      };
+      console.log('Atualizando informações do serviço:', sanitizedServiceInfo);
+      try {
+        const updateData = {
+          serviceInfo: sanitizedServiceInfo,
+          updatedAt: serverTimestamp(),
         };
-
-        console.log(
-          'Atualizando informações do serviço:',
-          sanitizedServiceInfo
-        );
-
-        try {
-          const updateData = {
-            serviceInfo: sanitizedServiceInfo,
-            updatedAt: serverTimestamp(),
-          };
-
-          console.log('Dados de atualização:', updateData);
-
-          await updateDoc(chatRef, updateData);
-          console.log('Informações do serviço atualizadas com sucesso');
-        } catch (updateError) {
-          console.error('Erro ao atualizar informações do serviço:', {
-            error: updateError.toString(),
-            code: updateError.code,
-            message: updateError.message,
-            stack: updateError.stack,
-            chatId,
-            serviceInfo: sanitizedServiceInfo,
-          });
-          throw updateError;
-        }
+        console.log('Dados de atualização:', updateData);
+        await updateDoc(chatRef, updateData);
+        console.log('Informações do serviço atualizadas com sucesso');
+      } catch (updateError) {
+        console.error('Erro ao atualizar informações do serviço:', {
+          error: updateError.toString(),
+          code: updateError.code,
+          message: updateError.message,
+          stack: updateError.stack,
+          chatId,
+          serviceInfo: sanitizedServiceInfo,
+        });
+        throw updateError;
       }
     }
-
     return chatId;
   } catch (error) {
     console.error('Erro detalhado em createOrGetChat:', {
@@ -215,16 +181,12 @@ export const sendMessage = async (chatId, senderId, text) => {
   try {
     console.log('Enviando mensagem para chat:', chatId);
     const messagesRef = collection(db, 'chats', chatId, 'messages');
-
-    // Adiciona a mensagem à subcoleção messages
     await addDoc(messagesRef, {
       senderId,
       text,
       timestamp: Timestamp.now(),
-      status: 'sent', // Status da mensagem: sent, delivered, read
+      status: 'sent',
     });
-
-    // Atualiza as informações do chat principal
     await updateDoc(doc(db, 'chats', chatId), {
       lastMessage: text,
       updatedAt: Timestamp.now(),
@@ -247,14 +209,12 @@ export const listenToMessages = (chatId, callback) => {
     collection(db, 'chats', chatId, 'messages'),
     orderBy('timestamp', 'asc')
   );
-
   const unsubscribe = onSnapshot(
     q,
     snapshot => {
       const messages = snapshot.docs.map(doc => ({
         id: doc.id,
         ...doc.data(),
-        // Converte o timestamp do Firestore para string ISO
         timestamp:
           doc.data().timestamp?.toDate().toISOString() ||
           new Date().toISOString(),
@@ -265,7 +225,6 @@ export const listenToMessages = (chatId, callback) => {
       console.error('Erro ao escutar mensagens:', error);
     }
   );
-
   return unsubscribe;
 };
 
@@ -279,7 +238,6 @@ export const getUserChats = async userId => {
     console.log('Buscando chats do usuário:', userId);
     const chatsRef = collection(db, 'chats');
     const q = query(chatsRef, where(`participants.${userId}`, '==', true));
-
     const querySnapshot = await getDocs(q);
     return querySnapshot.docs.map(doc => ({
       id: doc.id,
@@ -317,7 +275,6 @@ export const markMessageAsRead = async (chatId, messageId) => {
  */
 export const listenToChatUpdates = (chatId, callback) => {
   const chatRef = doc(db, 'chats', chatId);
-
   return onSnapshot(
     chatRef,
     doc => {
