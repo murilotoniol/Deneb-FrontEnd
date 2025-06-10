@@ -17,10 +17,15 @@ import {
   Paper,
   CircularProgress,
   Link as MuiLink,
+  OutlinedInput,
+  FormControl,
+  InputLabel,
+  FormHelperText,
 } from '@mui/material';
 import { PawPrint } from 'lucide-react';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
+import { IMaskInput } from 'react-imask';
 
 export default function Cadastro() {
   const navigate = useNavigate();
@@ -214,7 +219,10 @@ export default function Cadastro() {
                 error={!!formErrors.cpf}
                 helperText={formErrors.cpf}
                 placeholder="000.000.000-00"
-                inputProps={{ maxLength: 14 }}
+                InputProps={{
+                  inputComponent: IMaskInput,
+                  inputProps: { mask: '000.000.000-00' }
+                }}
                 sx={{ mb: 2 }}
               />
               <TextField
@@ -229,7 +237,10 @@ export default function Cadastro() {
                 error={!!formErrors.phone_number}
                 helperText={formErrors.phone_number}
                 placeholder="(00) 00000-0000"
-                inputProps={{ maxLength: 15 }}
+                InputProps={{
+                  inputComponent: IMaskInput,
+                  inputProps: { mask: '(00) 00000-0000' }
+                }}
                 sx={{ mb: 2 }}
               />
               <TextField
@@ -244,7 +255,10 @@ export default function Cadastro() {
                 error={!!formErrors.birth_date}
                 helperText={formErrors.birth_date}
                 placeholder="DD/MM/AAAA"
-                inputProps={{ maxLength: 10 }}
+                InputProps={{
+                  inputComponent: IMaskInput,
+                  inputProps: { mask: '00/00/0000' }
+                }}
                 sx={{ mb: 2 }}
               />
               <TextField
